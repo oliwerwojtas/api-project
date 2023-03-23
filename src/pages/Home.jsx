@@ -14,9 +14,9 @@ const Home = () => {
   const { popular, newGames, upcoming, platforms } = useSelector((state) => state.games);
 
   return (
-    <div>
+    <GameList>
       <h2>Upcoming Games</h2>
-      <div>
+      <Games>
         {upcoming.map((game) => (
           <Game
             name={game.name}
@@ -25,9 +25,20 @@ const Home = () => {
             image={game.background_image}
           />
         ))}
-      </div>
-    </div>
+      </Games>
+    </GameList>
   );
 };
 
+const GameList = styled.div`
+  padding: 0rem 5rem;
+`;
+
+const Games = styled.div`
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-column-gap: 3rem;
+  grid-row-gap: 5rem;
+`;
 export default Home;
