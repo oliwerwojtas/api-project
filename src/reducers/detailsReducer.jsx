@@ -1,5 +1,6 @@
 const initState = {
   game: {},
+  screen: {},
 };
 const gamesReducer = (state = initState, action) => {
   switch (action.type) {
@@ -7,6 +8,7 @@ const gamesReducer = (state = initState, action) => {
       return {
         ...state,
         game: action.payload.game,
+        screen: action.payload.screen,
       };
     default:
       return { ...state };
