@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Platform from "./Platforms";
-
+import Stars from "./Stars";
 const GameDetail = ({ pathId }) => {
   const navigate = useNavigate();
   const closeDetailHandler = (e) => {
@@ -13,28 +13,12 @@ const GameDetail = ({ pathId }) => {
       document.body.style.overflow = "auto";
       navigate("/");
     }
-    console.log(element);
   };
 
-  //get platform images
-  const getPlatform = (platform) => {
-    switch (platform) {
-      case "Playstation 4":
-        return playstation;
-      case "Xbox One":
-        return xbox;
-      case "PC":
-        return steam;
-      case "Nintendo Switch":
-        return nintendo;
-      case "iOS":
-        return apple;
-      default:
-        return gamepad;
-    }
-  };
+  //get stars
 
   const { screen, game, isLoading } = useSelector((state) => state.detail);
+  console.log(game.rating);
   return (
     <>
       {!isLoading && (
@@ -44,6 +28,7 @@ const GameDetail = ({ pathId }) => {
               <div className="rating">
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
+                <Stars rating={game.rating} />
               </div>
               <Info>
                 <h3>Platforms</h3>
