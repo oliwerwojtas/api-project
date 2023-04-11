@@ -18,12 +18,12 @@ const GlobalStyles = createGlobalStyle`
   }
     }
     body{
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Poppins', sans-serif;
         width: 100%;
     }
     h2{
         font-size: 3rem;
-        font-family: 'Abril Fatface', cursive;
+        font-family: 'Poppins', cursive;
         font-weight: lighter;
         color: #333;
     }
@@ -46,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
     }
     input{
         font-weight: bold;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Poppins", sans-serif;
     }
 `;
 
