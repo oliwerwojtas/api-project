@@ -38,3 +38,6 @@ export const gameDetails = (game_id) =>
 console.log(gameDetails());
 export const gameScreenshot = (game_id) =>
   `${base_url}games/${game_id}/screenshots?key=ea958761ee7f47db990ec82553924efe`;
+export const searchGameURL = (game_name) =>
+  `${base_url}games?search=${game_name}&page_size=5&key=ea958761ee7f47db990ec82553924efe`;
+console.log(searchGameURL());
