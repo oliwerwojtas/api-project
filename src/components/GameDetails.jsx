@@ -17,8 +17,12 @@ const GameDetail = ({ pathId }) => {
 
   //get stars
 
-  const { screen, game, isLoading } = useSelector((state) => state.detail);
-  console.log(game.rating);
+  const { screen, game, series, achievements, isLoading } = useSelector((state) => state.detail);
+  console.log(game);
+  console.log(game.website);
+  console.log(series);
+  console.log(achievements);
+
   return (
     <>
       {!isLoading && (

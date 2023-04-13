@@ -41,3 +41,9 @@ export const gameScreenshot = (game_id) =>
 export const searchGameURL = (game_name) =>
   `${base_url}games?search=${game_name}&page_size=5&key=ea958761ee7f47db990ec82553924efe`;
 console.log(searchGameURL());
+export const seriesGamesURL = (game_id) =>
+  `${base_url}games/${game_id}/game-series?key=ea958761ee7f47db990ec82553924efe`;
+console.log(seriesGamesURL());
+export const gameAchievements = (game_id) =>
+  `${base_url}games/${game_id}/achievements?key=ea958761ee7f47db990ec82553924efe`;
+console.log(gameAchievements());

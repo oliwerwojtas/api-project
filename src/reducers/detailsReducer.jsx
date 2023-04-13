@@ -1,6 +1,8 @@
 const initState = {
   game: { platforms: [] },
   screen: { results: [] },
+  series: { results: [] },
+  achievements: {},
   isLoading: true,
 };
 const gamesReducer = (state = initState, action) => {
@@ -10,6 +12,8 @@ const gamesReducer = (state = initState, action) => {
         ...state,
         game: action.payload.game,
         screen: action.payload.screen,
+        series: action.payload.series,
+        achievements: action.payload.achievements,
         isLoading: false,
       };
 
