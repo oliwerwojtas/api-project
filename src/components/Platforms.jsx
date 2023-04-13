@@ -40,9 +40,14 @@ const Platform = ({ platforms }) => {
 
 const Platforms = styled(motion.div)`
   display: flex;
+
+  width: 100%;
+  align-items: center;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   img {
-    margin-left: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
 `;
 export default Platform;
