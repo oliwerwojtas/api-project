@@ -48,3 +48,5 @@ console.log(seriesGamesURL());
 export const gameAchievements = (game_id) =>
   `${base_url}games/${game_id}/achievements?key=ea958761ee7f47db990ec82553924efe`;
 console.log(gameAchievements());
+export const allGenres = () => `${base_url}genres?key=ea958761ee7f47db990ec82553924efe`;
+console.log(allGenres());

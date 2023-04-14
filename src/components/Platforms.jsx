@@ -44,7 +44,7 @@ const Platforms = styled(motion.div)`
   width: 100%;
   align-items: center;
   justify-content: space-evenly;
-  flex-wrap: wrap;
+
   img {
     width: 2rem;
     height: 2rem;

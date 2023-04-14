@@ -4,10 +4,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { loadGames } from "../actions/gamesAction";
+import { loadGenres } from "../actions/genresAction";
 import styled from "styled-components";
 import Game from "../components/Game";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { fadeIn } from "../animations";
+
+import Select from "react-select";
 const Home = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
@@ -16,14 +19,26 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(loadGames());
+    dispatch(loadGenres());
   }, [dispatch]);
+
+  //options for select
 
   //get data
   const { popular, newGames, upcoming, searched, platforms } = useSelector((state) => state.games);
+  const { genres } = useSelector((state) => state.genres);
 
+  const options = genres.map((genre) => ({
+    value: genre.id,
+    label: genre.name,
+  }));
+  console.log(genres);
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
       <LayoutGroup>
+        <div>
+          <Select options={options} />
+        </div>
         <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
         {searched.length > 0 ? (
           <div className="searched">
@@ -80,7 +95,7 @@ const Home = () => {
 };
 
 const GameList = styled(motion.div)`
-  padding: 0rem 5rem;
+  padding: 0rem 2rem;
 `;
 
 const Games = styled(motion.div)`

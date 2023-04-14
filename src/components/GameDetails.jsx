@@ -36,18 +36,22 @@ const GameDetail = ({ pathId }) => {
               <GameName>
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
               </GameName>
-              <div>
-                <p>Rating: {game.rating}</p>
-                <Stars rating={game.rating} />
-                <h3>Raings:</h3>
-                {game.ratings.map((el) => (
-                  <div>
-                    <p>
-                      {el.title} - {el.count}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <Ratings>
+                <div>
+                  <p>Rating: {game.rating}</p>
+                  <Stars rating={game.rating} />
+                </div>
+                <div>
+                  <p>Ratings:</p>
+                  {game.ratings.map((el) => (
+                    <div>
+                      <p>
+                        {el.title} - {el.count}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Ratings>
             </Stats>
             <Info>
               <h3>Platforms</h3>
@@ -76,11 +80,11 @@ const GameDetail = ({ pathId }) => {
             <Description>
               <p>{game.description_raw}</p>
             </Description>
-            <div className="gallery">
+            <Gallery className="gallery">
               {screen.results.map((screen) => (
                 <img src={screen.image} key={screen.id} alt="game" />
               ))}
-            </div>
+            </Gallery>
             <div>
               <h3>Series</h3>
               {series.results.map((el) => (
@@ -124,7 +128,9 @@ const CardShadow = styled(motion.div)`
   position: fixed;
   overflow-y: scroll;
   top: 0;
-  left: 0;
+  // display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 5;
 
   &::-webkit-scrollbar {
@@ -142,18 +148,25 @@ const CardShadow = styled(motion.div)`
 
 const Detail = styled(motion.div)`
   display: flex;
+
   flex-direction: column;
-  width: 60%;
+  width: 40%;
   border-radius: 1rem;
   padding: 0 1rem;
   background: white;
   position: absolute;
-
+  overflow-y: scroll;
   color: black;
   z-index: 10;
   img {
     width: 100%;
   }
+
+  @media screen and (max-width: 400px) {
+    
+    
+      width: 70%; 
+    
 `;
 
 const Stats = styled(motion.div)`
@@ -194,5 +207,16 @@ const GameName = styled(motion.div)`
 const Stores = styled(motion.div)`
   display: flex;
   flex-direction: column;
+`;
+
+const Gallery = styled(motion.div)`
+  img {
+    width: 100%; /* obrazek zajmie 100% szerokości elementu nadrzędnego */
+    max-width: 400px; /* maksymalna szerokość obrazka */
+  }
+`;
+
+const Ratings = styled(motion.div)`
+  display: flex;
 `;
 export default GameDetail;

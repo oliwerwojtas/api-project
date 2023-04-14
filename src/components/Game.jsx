@@ -36,7 +36,7 @@ const StyleGame = styled(motion.div)`
 
   box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   img {
     width: 100%;
