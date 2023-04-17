@@ -9,7 +9,7 @@ import styled from "styled-components";
 import Game from "../components/Game";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { fadeIn } from "../animations";
-
+import GamesFiltring from "../components/GamesFiltring";
 import Select from "react-select";
 const Home = () => {
   const location = useLocation();
@@ -22,22 +22,36 @@ const Home = () => {
     dispatch(loadGenres());
   }, [dispatch]);
 
-  //options for select
-
-  //get data
   const { popular, newGames, upcoming, searched, platforms } = useSelector((state) => state.games);
-  const { genres } = useSelector((state) => state.genres);
 
-  const options = genres.map((genre) => ({
-    value: genre.id,
-    label: genre.name,
-  }));
-  console.log(genres);
+  const { genres } = useSelector((state) => state.genres);
+  console.log(newGames);
+  const options = genres
+    ? [
+        {
+          value: null,
+          label: "All",
+        },
+        ...genres.map((genre) => ({
+          value: genre.id,
+          label: genre.name,
+        })),
+      ]
+    : [];
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  // filter games by selected category
+
+  const handleSelectChange = (selectedOption) => {
+    setSelectedCategory(selectedOption);
+  };
+
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
       <LayoutGroup>
         <div>
-          <Select options={options} />
+          <Select options={options} onChange={handleSelectChange} />
         </div>
         <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
         {searched.length > 0 ? (
@@ -58,36 +72,15 @@ const Home = () => {
         )}
         <h2>Upcoming Games</h2>
         <Games>
-          {upcoming.map((game) => (
-            <Game
-              name={game.name}
-              released={game.released}
-              id={game.id}
-              image={game.background_image}
-            />
-          ))}
+          <GamesFiltring games={upcoming} categories={genres} selectedCategory={selectedCategory} />
         </Games>
         <h2>Popular Games</h2>
         <Games>
-          {popular.map((game) => (
-            <Game
-              name={game.name}
-              released={game.released}
-              id={game.id}
-              image={game.background_image}
-            />
-          ))}
+          <GamesFiltring games={popular} categories={genres} selectedCategory={selectedCategory} />
         </Games>
-        <h2>Upcoming Games</h2>
+        <h2>NewGames Games</h2>
         <Games>
-          {newGames.map((game) => (
-            <Game
-              name={game.name}
-              released={game.released}
-              id={game.id}
-              image={game.background_image}
-            />
-          ))}
+          <GamesFiltring games={newGames} categories={genres} selectedCategory={selectedCategory} />
         </Games>
       </LayoutGroup>
     </GameList>

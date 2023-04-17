@@ -211,8 +211,8 @@ const Stores = styled(motion.div)`
 
 const Gallery = styled(motion.div)`
   img {
-    width: 100%; /* obrazek zajmie 100% szerokości elementu nadrzędnego */
-    max-width: 400px; /* maksymalna szerokość obrazka */
+    width: 100%;
+    max-width: 400px;
   }
 `;
 
