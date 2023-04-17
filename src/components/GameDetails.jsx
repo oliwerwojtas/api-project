@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Platform from "./Platforms";
 import Stars from "./Stars";
+import Stores from "./Stores";
+import Achievements from "./Achievements";
+import Series from "./Series";
+import Genres from "./Genres";
+import Ratings from "./Ratings";
+import Gallery from "./Gallery";
 const GameDetail = ({ pathId }) => {
   const navigate = useNavigate();
   const closeDetailHandler = (e) => {
@@ -19,14 +24,6 @@ const GameDetail = ({ pathId }) => {
 
   const { screen, game, series, achievements, isLoading } = useSelector((state) => state.detail);
 
-  console.log(game);
-  console.log(game.website);
-  console.log(game.genres);
-  console.log(series);
-  console.log(achievements);
-  // console.log(game.stores.store);
-  console.log(screen);
-  console.log(game.ratings);
   return (
     <>
       {!isLoading && (
@@ -36,22 +33,13 @@ const GameDetail = ({ pathId }) => {
               <GameName>
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
               </GameName>
-              <Ratings>
-                <div>
-                  <p>Rating: {game.rating}</p>
-                  <Stars rating={game.rating} />
-                </div>
-                <div>
-                  <p>Ratings:</p>
-                  {game.ratings.map((el) => (
-                    <div>
-                      <p>
-                        {el.title} - {el.count}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </Ratings>
+              {/* <Ratings> */}
+              <div>
+                <p>Rating: {game.rating}</p>
+                <Stars rating={game.rating} />
+              </div>
+              <Ratings game={game} />
+              {/* </Ratings> */}
             </Stats>
             <Info>
               <h3>Platforms</h3>
@@ -61,59 +49,24 @@ const GameDetail = ({ pathId }) => {
 
             <div>
               <h3>Website</h3>
-              <a href={game.website} target="_blank">
-                {game.website}
-              </a>
+              <a href={game.website}>{game.website}</a>
             </div>
-            <div>
-              <h3>Genres:</h3>
-              {game.genres.map((el) => (
-                <div>
-                  <p>{el.name}</p>
-                  <p>counts games in total({el.games_count})</p>
-                </div>
-              ))}
-            </div>
+
+            <Genres game={game} />
+
             <Media>
               <motion.img layoutId={`image ${pathId}`} src={game.background_image} alt="image" />
             </Media>
             <Description>
               <p>{game.description_raw}</p>
             </Description>
-            <Gallery className="gallery">
-              {screen.results.map((screen) => (
-                <img src={screen.image} key={screen.id} alt="game" />
-              ))}
-            </Gallery>
-            <div>
-              <h3>Series</h3>
-              {series.results.map((el) => (
-                <div>
-                  <p>{el.name}</p>
-                  <img src={el.background_image} alt="background-image" />
-                </div>
-              ))}
-            </div>
-            <div>
-              <h3>
-                {achievements.results.map((el) => (
-                  <div>
-                    <p>{el.name}</p>
-                    <p>{el.description}</p>
-                    <img src={el.image} alt="achievment image" />
-                  </div>
-                ))}
-              </h3>
-            </div>
-            <Stores>
-              <h3>Where u can buy it?</h3>
-              {game.stores.map((el) => (
-                <div>
-                  <p>{el.store.name}</p>
-                  <img src={el.store.image_background} alt="store photo" />
-                </div>
-              ))}
-            </Stores>
+            <Gallery screen={screen} />
+
+            <Series series={series} />
+
+            <Achievements achievements={achievements} />
+
+            <Stores game={game} />
           </Detail>
         </CardShadow>
       )}
@@ -204,19 +157,7 @@ const GameName = styled(motion.div)`
   width: 100%;
 `;
 
-const Stores = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Gallery = styled(motion.div)`
-  img {
-    width: 100%;
-    max-width: 400px;
-  }
-`;
-
-const Ratings = styled(motion.div)`
-  display: flex;
-`;
+// const Ratings = styled(motion.div)`
+//   display: flex;
+// `;
 export default GameDetail;

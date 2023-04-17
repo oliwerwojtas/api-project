@@ -57,14 +57,11 @@ const Home = () => {
         {searched.length > 0 ? (
           <div className="searched">
             <Games>
-              {searched.map((game) => (
-                <Game
-                  name={game.name}
-                  released={game.released}
-                  id={game.id}
-                  image={game.background_image}
-                />
-              ))}
+              <GamesFiltring
+                games={searched}
+                categories={genres}
+                selectedCategory={selectedCategory}
+              />
             </Games>
           </div>
         ) : (
