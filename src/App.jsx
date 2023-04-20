@@ -1,19 +1,24 @@
 import React from "react";
-import GlobalStyles from "./components/GlobalStyle";
 import Home from "./pages/Home";
-import { Routes, Route } from "react-router-dom";
-import Navigation from "./components/Navigation";
-function App() {
+import RootLayout from "./pages/RootLayout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/game/:id", element: <Home /> },
+    ],
+  },
+]);
+const App = () => {
   return (
-    <div className="App">
-      <GlobalStyles />
-      <Navigation />
-      <Routes>
-        <Route path="/game/:id" element={<Home />}></Route>
-        <Route path="/" element={<Home />}></Route>
-      </Routes>
+    <div>
+      <RouterProvider router={router} />
     </div>
   );
-}
+};
 
 export default App;
