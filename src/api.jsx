@@ -21,11 +21,11 @@ const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
 const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 
 //Popular Gamesde
-const popular_games = `games?key=ea958761ee7f47db990ec82553924efe&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
+const popular_games = `games?key=ea958761ee7f47db990ec82553924efe&dates=${lastYear},${currentDate}&ordering=-rating&page_size=12`;
 
-const upcoming_games = `games?key=ea958761ee7f47db990ec82553924efe&dates=${lastYear},${currentDate}&ordering=-added&page_size=10`;
+const upcoming_games = `games?key=ea958761ee7f47db990ec82553924efe&dates=${lastYear},${currentDate}&ordering=-added&page_size=12`;
 
-const new_games = `games?key=ea958761ee7f47db990ec82553924efe&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
+const new_games = `games?key=ea958761ee7f47db990ec82553924efe&dates=${lastYear},${currentDate}&ordering=-released&page_size=12`;
 const platforms = `platforms?key=ea958761ee7f47db990ec82553924efe`;
 export const popularGamesURL = () => `${base_url}${popular_games}`;
 console.log(popularGamesURL());
@@ -40,7 +40,7 @@ export const gameScreenshot = (game_id) =>
   `${base_url}games/${game_id}/screenshots?key=ea958761ee7f47db990ec82553924efe`;
 console.log(gameScreenshot());
 export const searchGameURL = (game_name) =>
-  `${base_url}games?search=${game_name}&page_size=5&key=ea958761ee7f47db990ec82553924efe`;
+  `${base_url}games?search=${game_name}&page_size=12&key=ea958761ee7f47db990ec82553924efe`;
 console.log(searchGameURL());
 export const seriesGamesURL = (game_id) =>
   `${base_url}games/${game_id}/game-series?key=ea958761ee7f47db990ec82553924efe`;

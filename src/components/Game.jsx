@@ -40,7 +40,7 @@ const StyleGame = styled(motion.div)`
   overflow: hidden;
   img {
     width: 100%;
-    height: 40vh;
+    height: 20vh;
     object-fit: cover;
   }
 `;

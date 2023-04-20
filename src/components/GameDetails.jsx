@@ -20,8 +20,6 @@ const GameDetail = ({ pathId }) => {
     }
   };
 
-  //get stars
-
   const { screen, game, series, achievements, isLoading } = useSelector((state) => state.detail);
 
   return (

@@ -72,6 +72,7 @@ const Logo = styled(motion.div)`
   img {
     height: 2rem;
     width: 2rem;
+    margin-right: 0.5rem;
   }
 `;
 
