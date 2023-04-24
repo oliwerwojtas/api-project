@@ -1,6 +1,7 @@
 import starEmpty from "../img/star-empty.png";
 import starFull from "../img/star-full.png";
-
+import styled from "styled-components";
+import { motion } from "framer-motion";
 const Stars = ({ rating }) => {
   const getStars = () => {
     const stars = [];
@@ -16,7 +17,12 @@ const Stars = ({ rating }) => {
     return stars;
   };
 
-  return <>{getStars()}</>;
+  return <StarsContainer>{getStars()}</StarsContainer>;
 };
+
+const StarsContainer = styled(motion.div)`
+  display: flex;
+  // flex-direction: column;
+`;
 
 export default Stars;

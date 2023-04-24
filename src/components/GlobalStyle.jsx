@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
     body{
         font-family: 'Poppins', sans-serif;
         width: 100%;
+        overflow: scroll;
     }
     h2{
         font-size: 2rem;
@@ -33,8 +34,7 @@ const GlobalStyles = createGlobalStyle`
         padding: 1.5rem 0rem;
     }
     p{
-        font-size: 1.2rem;
-        line-height: 200%;
+        font-size: 1rem;
         color: #696969;
     }
     a{

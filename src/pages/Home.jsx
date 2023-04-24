@@ -14,7 +14,7 @@ import Select from "react-select";
 const Home = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
-  // console.log(path);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,5 +1,10 @@
 import axios from "axios";
-import { gameDetails, gameScreenshot, seriesGamesURL, gameAchievements } from "../api";
+import {
+  gameDetails,
+  gameScreenshot,
+  seriesGamesURL,
+  gameAchievements,
+} from "../configs/endpoints";
 export const loadDetail = (id) => async (dispatch) => {
   dispatch({
     type: "LOADING_DETAILS",

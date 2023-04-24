@@ -5,7 +5,9 @@ const Gallery = ({ screen }) => {
     <GalleryContainer>
       <h3>Screens:</h3>
       {screen.results.map((screen) => (
-        <img src={screen.image} key={screen.id} alt="game" />
+        <Image>
+          <img src={screen.image} key={screen.id} alt="game" />
+        </Image>
       ))}
     </GalleryContainer>
   );
@@ -15,5 +17,11 @@ const GalleryContainer = styled(motion.div)`
     width: 100%;
     max-width: 400px;
   }
+`;
+
+const Image = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export default Gallery;

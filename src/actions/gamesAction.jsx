@@ -5,7 +5,7 @@ import {
   newGamesURL,
   getPlatforms,
   searchGameURL,
-} from "../api";
+} from "../configs/endpoints";
 
 export const loadGames = () => async (dispatch) => {
   const popularData = await axios.get(popularGamesURL());

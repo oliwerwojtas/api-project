@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
-
+import Modal from "./Modal";
 import { popup } from "../animations";
+import { useState } from "react";
 
 const Game = ({ name, released, image, id }) => {
   // const stringPathId = id.toString();

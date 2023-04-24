@@ -30,14 +30,11 @@ const GameDetail = ({ pathId }) => {
             <Stats>
               <GameName>
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
-              </GameName>
-              {/* <Ratings> */}
-              <div>
-                <p>Rating: {game.rating}</p>
                 <Stars rating={game.rating} />
-              </div>
-              <Ratings game={game} />
-              {/* </Ratings> */}
+              </GameName>
+              <Rating>
+                <Ratings game={game} />
+              </Rating>
             </Stats>
             <Info>
               <h3>Platforms</h3>
@@ -73,50 +70,43 @@ const GameDetail = ({ pathId }) => {
 };
 const CardShadow = styled(motion.div)`
   width: 100%;
-  height: 100vh;
-
+  min-height: 100vh;
+  overflow-y: scroll;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
-  overflow-y: scroll;
   top: 0;
-  // display: flex;
-  justify-content: center;
-  align-items: center;
+  left: 0;
   z-index: 5;
-
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
-
   &::-webkit-scrollbar-thumb {
     background-color: #ff7676;
   }
-
   &::-webkit-scrollbar-track {
     background: white;
   }
 `;
 
 const Detail = styled(motion.div)`
-  display: flex;
-
-  flex-direction: column;
   width: 40%;
   border-radius: 1rem;
-  padding: 0 1rem;
+  padding: 2rem 5rem;
   background: white;
   position: absolute;
-  overflow-y: scroll;
+  left: 30%;
   color: black;
   z-index: 10;
   img {
     width: 100%;
   }
 
+
   @media screen and (max-width: 400px) {
     
     
-      width: 70%; 
+      width: 80%; 
+      left: 10%;
     
 `;
 
@@ -130,13 +120,19 @@ const Stats = styled(motion.div)`
     font-size: 1rem;
   }
   img {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: inline;
   }
 `;
 const Info = styled(motion.div)`
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (max-width: 400px) {
+    display: flex;
+  }
 `;
 
 const Media = styled(motion.div)`
@@ -152,10 +148,10 @@ const Description = styled(motion.div)`
 
 const GameName = styled(motion.div)`
   display: flex;
-  width: 100%;
 `;
 
-// const Ratings = styled(motion.div)`
-//   display: flex;
-// `;
+const Rating = styled(motion.div)`
+  display: flex;
+  width: 100%;
+`;
 export default GameDetail;

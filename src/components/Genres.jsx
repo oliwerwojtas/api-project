@@ -5,10 +5,9 @@ const Genres = ({ game }) => {
     <GenresContainer>
       <h3>Genres:</h3>
       {game.genres.map((genre) => (
-        <div>
-          <p>{genre.name}</p>
-          <p>counts games in total({genre.games_count})</p>
-        </div>
+        <Genre>
+          {genre.name} -<p> in total games({genre.games_count})</p>
+        </Genre>
       ))}
     </GenresContainer>
   );
@@ -16,5 +15,9 @@ const Genres = ({ game }) => {
 const GenresContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
+`;
+
+const Genre = styled(motion.div)`
+  display: flex;
 `;
 export default Genres;

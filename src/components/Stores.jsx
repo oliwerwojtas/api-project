@@ -7,8 +7,7 @@ const Stores = ({ game }) => {
       <p>Where can I buy it?</p>
       {game.stores.map((gameStore) => (
         <div>
-          <p>{gameStore.store.name}</p>
-          <img src={gameStore.store.image_background} alt="store logo" />
+          <p>- {gameStore.store.name}</p>
         </div>
       ))}
     </StoresContainer>

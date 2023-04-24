@@ -1,5 +1,5 @@
 import axios from "axios";
-import { allGenres } from "../api";
+import { allGenres } from "../configs/endpoints";
 export const loadGenres = () => async (dispatch) => {
   const genresData = await axios.get(allGenres());
 
