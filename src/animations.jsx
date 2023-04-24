@@ -31,3 +31,14 @@ export const popup = {
     },
   },
 };
+export const collapse = {
+  hidden: {
+    height: 0,
+  },
+  show: {
+    height: "auto",
+    transition: {
+      duration: 0.5,
+    },
+  },
+};

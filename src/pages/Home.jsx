@@ -120,6 +120,9 @@ const Home = () => {
 
 const GameList = styled(motion.div)`
   padding: 0rem 2rem;
+  h2 {
+    color: white;
+  }
 `;
 
 const Games = styled(motion.div)`

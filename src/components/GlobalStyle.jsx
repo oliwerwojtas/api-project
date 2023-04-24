@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Poppins', sans-serif;
         width: 100%;
         overflow: scroll;
+        background: #151515;
     }
     h2{
         font-size: 2rem;

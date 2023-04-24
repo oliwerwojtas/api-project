@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import gamelogo from "../img/gamelogo.svg";
+import gamepad from "../assets/gamepad.svg";
 import { fadeIn } from "../animations";
 //
 import { fetchSearch } from "../actions/gamesAction";
@@ -27,7 +27,7 @@ const Navigation = () => {
   return (
     <StyledNavigation variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={clearSearched}>
-        <img src={gamelogo} alt="logo" />
+        <img src={gamepad} alt="logo" />
         <h1>GameFinder</h1>
       </Logo>
       <form className="search">
@@ -62,6 +62,9 @@ const StyledNavigation = styled(motion.nav)`
     color: white;
     margin-left: 0.5rem;
   }
+  h1 {
+    color: white;
+  }
 `;
 
 const Logo = styled(motion.div)`
@@ -73,6 +76,7 @@ const Logo = styled(motion.div)`
     height: 2rem;
     width: 2rem;
     margin-right: 0.5rem;
+    filter: invert(1);
   }
 `;
 

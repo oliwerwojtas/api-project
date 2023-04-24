@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadDetail } from "../actions/detailAction";
-import Modal from "./Modal";
+
 import { popup } from "../animations";
-import { useState } from "react";
 
 const Game = ({ name, released, image, id }) => {
   // const stringPathId = id.toString();
@@ -39,10 +38,15 @@ const StyleGame = styled(motion.div)`
   text-align: center;
   border-radius: 0.5rem;
   overflow: hidden;
+  background-color: #202020;
   img {
     width: 100%;
     height: 20vh;
     object-fit: cover;
+  }
+  h3,
+  p {
+    color: white;
   }
 `;
 
