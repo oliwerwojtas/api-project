@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import { useComponentStyles } from "../../hooks/useComponentStyles";
+
 const Series = ({ series }) => {
+  const { Container } = useComponentStyles();
   return (
-    <SeriesContainer>
+    <Container>
       <h3>Series</h3>
       {series.results.map((series) => (
         <div>
@@ -10,11 +11,8 @@ const Series = ({ series }) => {
           <img src={series.background_image} alt="series background" />
         </div>
       ))}
-    </SeriesContainer>
+    </Container>
   );
 };
-const SeriesContainer = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-`;
+
 export default Series;

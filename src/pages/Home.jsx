@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import GameDetail from "../components/GameDetails";
+import GameDetail from "../components/gameDetails/GameDetails";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";

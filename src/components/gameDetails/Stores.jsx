@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import { useComponentStyles } from "../../hooks/useComponentStyles";
 const Stores = ({ game }) => {
+  const { Container } = useComponentStyles();
   return (
-    <StoresContainer>
+    <Container>
       <h3>Series</h3>
       <p>Where can I buy it?</p>
       {game.stores.map((gameStore) => (
@@ -10,11 +10,8 @@ const Stores = ({ game }) => {
           <p>- {gameStore.store.name}</p>
         </div>
       ))}
-    </StoresContainer>
+    </Container>
   );
 };
-const StoresContainer = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-`;
+
 export default Stores;

@@ -41,4 +41,10 @@ export const collapse = {
       duration: 0.5,
     },
   },
+  exit: {
+    height: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
 };

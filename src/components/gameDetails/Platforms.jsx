@@ -1,5 +1,3 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
 import playstation from "../img/playstation.svg";
 import steam from "../img/steam.svg";
 import xbox from "../img/xbox.svg";
@@ -7,7 +5,10 @@ import nintendo from "../img/nintendo.svg";
 import apple from "../img/apple.svg";
 import gamepad from "../img/gamepad.svg";
 
+import { useComponentStyles } from "../../hooks/useComponentStyles";
 const Platform = ({ platforms }) => {
+  const { Platforms } = useComponentStyles();
+
   const getPlatform = (platform) => {
     switch (platform) {
       case "Playstation 4":
@@ -38,16 +39,4 @@ const Platform = ({ platforms }) => {
   );
 };
 
-const Platforms = styled(motion.div)`
-  display: flex;
-
-  width: 100%;
-  align-items: center;
-  justify-content: space-evenly;
-
-  img {
-    width: 2rem;
-    height: 2rem;
-  }
-`;
 export default Platform;

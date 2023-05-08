@@ -1,12 +1,16 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
 import Chart from "react-apexcharts";
+import { useComponentStyles } from "../../hooks/useComponentStyles";
 
 const Ratings = ({ game }) => {
+  const { RatingsContainer } = useComponentStyles();
   const chartData = {
     options: {
       xaxis: {
         categories: game.ratings.map((el) => el.title),
+      },
+      colors: ["#2E8B57"], // ustawienie koloru linii
+      chart: {
+        background: "#222", // ustawienie koloru tła
       },
     },
     series: [
@@ -24,15 +28,5 @@ const Ratings = ({ game }) => {
     </RatingsContainer>
   );
 };
-
-const RatingsContainer = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  h3 {
-    padding: 0;
-  }
-`;
 
 export default Ratings;
