@@ -18,7 +18,7 @@ const Platform = ({ platforms }) => {
         return steam;
       case "Nintendo Switch":
         return nintendo;
-      case "iOS":
+      case "macOS":
         return apple;
       default:
         return gamepad;

@@ -40,32 +40,32 @@ const Home = () => {
     : [];
 
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOption, setSortOption] = useState({ value: "name-asc", label: "Name A-Z" });
 
   // filter games by selected category
 
   const handleSelectChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
   };
-  const [sortBy, setSortBy] = useState("A-Z");
 
-  const sortGames = (games) => {
-    if (sortBy === "A-Z") {
-      return games.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === "Z-A") {
-      return games.sort((a, b) => b.name.localeCompare(a.name));
-    } else if (sortBy === "Release Date") {
-      return games.sort((a, b) => new Date(b.released) - new Date(a.released));
-    } else if (sortBy === "old Date") {
-      return games.sort((a, b) => new Date(a.released) - new Date(b.released));
-    } else {
-      return games;
-    }
+  const handleSortChange = (selectedOption) => {
+    setSortOption(selectedOption.value);
   };
 
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
       <div>
         <StyledSelect options={options} onChange={handleSelectChange} />
+      </div>
+      <div>
+        <Select
+          options={[
+            { value: "name-asc", label: "Name A-Z" },
+            { value: "name-desc", label: "Name Z-A" },
+          ]}
+          value={sortOption}
+          onChange={handleSortChange}
+        />
       </div>
 
       <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
@@ -83,36 +83,32 @@ const Home = () => {
         ""
       )}
 
-      <div>
-        Sort by:
-        <button onClick={() => setSortBy("A-Z")} disabled={sortBy === "A-Z"}>
-          A-Z
-        </button>
-        <button onClick={() => setSortBy("Z-A")} disabled={sortBy === "Z-A"}>
-          Z-A
-        </button>
-        <button onClick={() => setSortBy("Release Date")} disabled={sortBy === "Release Date"}>
-          newest date
-        </button>
-        <button onClick={() => setSortBy("old Date")} disabled={sortBy === "old Date"}>
-          date
-        </button>
-      </div>
       <h2>Upcoming Games</h2>
       <Games>
         <GamesFiltring
-          games={sortGames(upcoming)}
+          games={upcoming}
           categories={genres}
           selectedCategory={selectedCategory}
+          sortOption={sortOption}
         />
       </Games>
       <h2>Popular Games</h2>
       <Games>
-        <GamesFiltring games={popular} categories={genres} selectedCategory={selectedCategory} />
+        <GamesFiltring
+          games={popular}
+          categories={genres}
+          selectedCategory={selectedCategory}
+          sortOption={sortOption}
+        />
       </Games>
       <h2>NewGames Games</h2>
       <Games>
-        <GamesFiltring games={newGames} categories={genres} selectedCategory={selectedCategory} />
+        <GamesFiltring
+          games={newGames}
+          categories={genres}
+          selectedCategory={selectedCategory}
+          sortOption={sortOption}
+        />
       </Games>
     </GameList>
   );

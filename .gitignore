@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-
+.env
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,22 +22,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-const upcoming_games = `games?key=ea958761ee7f47db990ec82553924efe&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
-const newGames = `games?key=ea958761ee7f47db990ec82553924efe&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
-
-export const popularGamesURL = () => `${base_url}${popular_games}`;
-console.log(popularGamesURL());
-export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
-
-export const newGamesURL = () => `${base_url}${newGames}`;
-//GAME DETAILS
-export const gameDetailsURL = (game_id) =>
-  `${base_url}games/${game_id}?key=ea958761ee7f47db990ec82553924efe`;
-console.log(gameDetailsURL());
-//Game ScreenShots
-export const gameScreenshotURL = (game_id) =>
-  `${base_url}games/${game_id}/screenshots?key=ea958761ee7f47db990ec82553924efe`;
-//Searched game
-export const searchGameURL = (game_name) => `${base_url}games?search=${game_name}&page_size=9`;
-
 
