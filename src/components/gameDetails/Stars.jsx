@@ -1,5 +1,5 @@
-import starEmpty from "../img/star-empty.png";
-import starFull from "../img/star-full.png";
+import starEmpty from "../../assets/star-empty.png";
+import starFull from "../../assets/star-full.png";
 import { useComponentStyles } from "../../hooks/useComponentStyles";
 
 const Stars = ({ rating }) => {

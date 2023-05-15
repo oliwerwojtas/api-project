@@ -5,7 +5,7 @@ const initState = {
   achievements: {},
   isLoading: true,
 };
-const gamesReducer = (state = initState, action) => {
+const detailsReducer = (state = initState, action) => {
   switch (action.type) {
     case "GET_DETAILS":
       return {
@@ -27,4 +27,4 @@ const gamesReducer = (state = initState, action) => {
   }
 };
 
-export default gamesReducer;
+export default detailsReducer;

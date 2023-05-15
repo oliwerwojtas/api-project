@@ -21,47 +21,49 @@ const GameDetail = ({ pathId }) => {
   };
 
   const { screen, game, series, achievements, isLoading } = useSelector((state) => state.detail);
-
+  console.log(game);
   return (
     <>
       {!isLoading && (
         <CardShadow className="shadow" onClick={closeDetailHandler}>
           <Detail layoutId={`container ${pathId}`}>
-            <Stats>
-              <GameName>
-                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
-                <Stars rating={game.rating} />
-              </GameName>
-              <Rating>
-                <Ratings game={game} />
-              </Rating>
-            </Stats>
-            <Info>
-              <h3>Platforms</h3>
+            <div className="w-full">
+              <Stats>
+                <GameName>
+                  <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
+                  <Stars rating={game.rating} />
+                </GameName>
+                <Rating>
+                  <Ratings game={game} />
+                </Rating>
+              </Stats>
+              <Info>
+                <h3>Platforms</h3>
 
-              <Platform platforms={game.platforms} />
-            </Info>
+                <Platform platforms={game.platforms} />
+              </Info>
 
-            <div>
-              <h3>Website</h3>
-              <a href={game.website}>{game.website}</a>
+              <div>
+                <h3>Website</h3>
+                <a href={game.website}>{game.website}</a>
+              </div>
+
+              <Genres game={game} />
+
+              <Media>
+                <motion.img layoutId={`image ${pathId}`} src={game.background_image} alt="image" />
+              </Media>
+              <Description>
+                <p>{game.description_raw}</p>
+              </Description>
+              <Gallery screen={screen} />
+
+              <Series series={series} />
+
+              <Achievements achievements={achievements} />
+
+              <Stores game={game} />
             </div>
-
-            <Genres game={game} />
-
-            <Media>
-              <motion.img layoutId={`image ${pathId}`} src={game.background_image} alt="image" />
-            </Media>
-            <Description>
-              <p>{game.description_raw}</p>
-            </Description>
-            <Gallery screen={screen} />
-
-            <Series series={series} />
-
-            <Achievements achievements={achievements} />
-
-            <Stores game={game} />
           </Detail>
         </CardShadow>
       )}
@@ -90,7 +92,7 @@ const CardShadow = styled(motion.div)`
 `;
 
 const Detail = styled(motion.div)`
-  width: 40%;
+  max-width: 40%;
   border-radius: 1rem;
   padding: 2rem 5rem;
   background: white;
@@ -102,13 +104,12 @@ const Detail = styled(motion.div)`
     width: 100%;
   }
 
-
   @media screen and (max-width: 400px) {
-    
-    
-      width: 80%; 
-      left: 10%;
-    
+    max-width: 330px;
+    left: 4%;
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
 `;
 
 const Stats = styled(motion.div)`

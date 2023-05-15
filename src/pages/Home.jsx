@@ -10,22 +10,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn } from "../animations";
 import GamesFiltring from "../components/GamesFiltring";
 import Select from "react-select";
-
+import "react-dropdown/style.css";
 const Home = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
 
   const dispatch = useDispatch();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOption, setSortOption] = useState({ value: "name-asc", label: "Name A-Z" });
+  const { popular, newGames, upcoming, searched } = useSelector((state) => state.games);
+
+  const { genres } = useSelector((state) => state.genres);
 
   useEffect(() => {
     dispatch(loadGames());
     dispatch(loadGenres());
   }, [dispatch]);
 
-  const { popular, newGames, upcoming, searched } = useSelector((state) => state.games);
+  console.log(popular);
 
-  const { genres } = useSelector((state) => state.genres);
-  console.log(newGames);
   const options = genres
     ? [
         {
@@ -38,9 +41,15 @@ const Home = () => {
         })),
       ]
     : [];
-
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [sortOption, setSortOption] = useState({ value: "name-asc", label: "Name A-Z" });
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      background: "#202020",
+      borderRadius: "0.5rem",
+      borderColor: "#202020",
+      color: "white",
+    }),
+  };
 
   // filter games by selected category
 
@@ -54,22 +63,16 @@ const Home = () => {
 
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
-      <div>
-        <StyledSelect options={options} onChange={handleSelectChange} />
-      </div>
-      <div>
-        <Select
-          options={[
-            { value: "name-asc", label: "Name A-Z" },
-            { value: "name-desc", label: "Name Z-A" },
-          ]}
-          value={sortOption}
-          onChange={handleSortChange}
+      <SelectDropdown>
+        <StyledSelect
+          placeholder="Wybierz..."
+          options={options}
+          onChange={handleSelectChange}
+          styles={customStyles}
         />
-      </div>
-
+      </SelectDropdown>
       <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
-      {searched.length > 0 ? (
+      {/* {searched.length > 0 ? (
         <div className="searched">
           <Games>
             <GamesFiltring
@@ -81,8 +84,24 @@ const Home = () => {
         </div>
       ) : (
         ""
-      )}
-
+      )} */}
+      <Dropdown className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn m-1">
+          Order by
+        </label>
+        <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <button onClick={() => handleSortChange({ value: "name-asc", label: "Name A-Z" })}>
+              Name A-Z
+            </button>
+          </li>
+          <li>
+            <button onClick={() => handleSortChange({ value: "name-desc", label: "Name Z-A" })}>
+              Name Z-A
+            </button>
+          </li>
+        </ul>
+      </Dropdown>
       <h2>Upcoming Games</h2>
       <Games>
         <GamesFiltring
@@ -132,6 +151,15 @@ const Games = styled(motion.div)`
 `;
 
 const StyledSelect = styled(Select)`
-  max-width: 300px;
+  min-width: 300px;
+`;
+
+const SelectDropdown = styled(motion.div)`
+  display: flex;
+`;
+
+const Dropdown = styled(motion.div)`
+  display: flex;
+  justify-content: end;
 `;
 export default Home;

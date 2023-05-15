@@ -48,6 +48,9 @@ const StyleGame = styled(motion.div)`
   p {
     color: white;
   }
+  h3 {
+    height: 8rem;
+  }
 `;
 
 export default Game;

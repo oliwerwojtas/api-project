@@ -1,9 +1,9 @@
-import playstation from "../img/playstation.svg";
-import steam from "../img/steam.svg";
-import xbox from "../img/xbox.svg";
-import nintendo from "../img/nintendo.svg";
-import apple from "../img/apple.svg";
-import gamepad from "../img/gamepad.svg";
+import playstation from "../../assets/playstation.svg";
+import steam from "../../assets/steam.svg";
+import xbox from "../../assets/xbox.svg";
+import nintendo from "../../assets/nintendo.svg";
+import apple from "../../assets/apple.svg";
+import gamepad from "../../assets/gamepad.svg";
 
 import { useComponentStyles } from "../../hooks/useComponentStyles";
 const Platform = ({ platforms }) => {

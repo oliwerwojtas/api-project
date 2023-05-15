@@ -3,6 +3,7 @@ const initState = {
   newGames: [],
   upcoming: [],
   platforms: [],
+  allGames: [],
   searched: [],
 };
 
@@ -15,6 +16,7 @@ const gamesReducer = (state = initState, action) => {
         upcoming: action.payload.upcoming,
         newGames: action.payload.newGames,
         platforms: action.payload.platforms,
+        allGames: action.payload.allGames,
       };
     case "FETCH_SEARCHED":
       return { ...state, searched: action.payload.searched };

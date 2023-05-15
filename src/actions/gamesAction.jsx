@@ -12,8 +12,10 @@ export const loadGames = () => async (dispatch) => {
   const upcomingData = await axios.get(upcomingGamesURL());
   const newGamesData = await axios.get(newGamesURL());
   const platformsData = await axios.get(getPlatforms());
+  const allData = await axios.get(popularGamesURL());
   console.log(platformsData);
-
+  console.log(popularData);
+  console.log(allData.data.count);
   dispatch({
     type: "FETCH_GAMES",
     payload: {
@@ -21,6 +23,7 @@ export const loadGames = () => async (dispatch) => {
       newGames: newGamesData.data.results,
       upcoming: upcomingData.data.results,
       platforms: platformsData.data.results,
+      allGames: allData.data.results,
     },
   });
 };

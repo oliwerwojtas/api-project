@@ -47,7 +47,7 @@ const GlobalStyles = createGlobalStyle`
     }
     input{
         font-weight: bold;
-    font-family: "Poppins", sans-serif;
+        font-family: "Poppins", sans-serif;
     }
 `;
 

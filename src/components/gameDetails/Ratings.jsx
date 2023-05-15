@@ -5,26 +5,19 @@ const Ratings = ({ game }) => {
   const { RatingsContainer } = useComponentStyles();
   const chartData = {
     options: {
-      xaxis: {
-        categories: game.ratings.map((el) => el.title),
-      },
-      colors: ["#2E8B57"], // ustawienie koloru linii
+      labels: game.ratings.map((el) => el.title),
       chart: {
-        background: "#222", // ustawienie koloru tła
+        background: "#222",
       },
+      colors: ["#2E8B57", "#FFA07A", "#ADD8E6", "#FFD700"], // lista kolorów dla etykiet
     },
-    series: [
-      {
-        name: "Count",
-        data: game.ratings.map((el) => el.count),
-      },
-    ],
+    series: game.ratings.map((el) => el.count),
   };
 
   return (
     <RatingsContainer key={game.id}>
       <h3>Ratings:</h3>
-      <Chart options={chartData.options} series={chartData.series} type="line" height={350} />
+      <Chart options={chartData.options} series={chartData.series} type="donut" height={350} />
     </RatingsContainer>
   );
 };
