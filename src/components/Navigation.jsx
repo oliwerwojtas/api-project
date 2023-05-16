@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import gamepad from "../assets/gamelogo.svg";
 import { fadeIn } from "../animations";
 //
-import { loadDetail } from "../actions/detailAction";
-import { fetchSearch } from "../actions/gamesAction";
+import { loadDetail } from "../store/actions/detailAction";
+import { fetchSearch } from "../store/actions/gamesAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

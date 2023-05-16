@@ -6,7 +6,7 @@ const Stores = ({ game }) => {
       <h3>Series</h3>
       <p>Where can I buy it?</p>
       {game.stores.map((gameStore) => (
-        <div>
+        <div key={game.name}>
           <p>- {gameStore.store.name}</p>
         </div>
       ))}

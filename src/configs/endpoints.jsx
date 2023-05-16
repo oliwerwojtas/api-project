@@ -14,7 +14,7 @@ const new_games = `games?key=${
 const platforms = `platforms?key=${import.meta.env.VITE_REACT_APP_API_KEY}`;
 
 export const popularGamesURL = () =>
-  `${BASE_URL}games?key=${import.meta.env.VITE_REACT_APP_API_KEY}&page=4&page_size=200`;
+  `${BASE_URL}games?key=${import.meta.env.VITE_REACT_APP_API_KEY}&page_size=${PAGE_SIZE}`;
 export const upcomingGamesURL = () => `${BASE_URL}${upcoming_games}`;
 export const newGamesURL = () => `${BASE_URL}${new_games}`;
 export const getPlatforms = () => `${BASE_URL}${platforms}`;

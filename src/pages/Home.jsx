@@ -3,8 +3,8 @@ import GameDetail from "../components/gameDetails/GameDetails";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { loadGames } from "../actions/gamesAction";
-import { loadGenres } from "../actions/genresAction";
+import { loadGames } from "../store/actions/gamesAction";
+import { loadGenres } from "../store/actions/genresAction";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn } from "../animations";
@@ -102,7 +102,7 @@ const Home = () => {
           </li>
         </ul>
       </Dropdown>
-      <h2>Upcoming Games</h2>
+      <span>Upcoming Games</span>
       <Games>
         <GamesFiltring
           games={upcoming}
@@ -111,7 +111,7 @@ const Home = () => {
           sortOption={sortOption}
         />
       </Games>
-      <h2>Popular Games</h2>
+      <span>Popular Games</span>
       <Games>
         <GamesFiltring
           games={popular}
@@ -120,7 +120,7 @@ const Home = () => {
           sortOption={sortOption}
         />
       </Games>
-      <h2>NewGames Games</h2>
+      <span>NewGames Games</span>
       <Games>
         <GamesFiltring
           games={newGames}
@@ -135,8 +135,10 @@ const Home = () => {
 
 const GameList = styled(motion.div)`
   padding: 0rem 2rem;
-  h2 {
+  span {
+    font-size: 1.8rem;
     color: white;
+    font-weight: bold;
   }
 `;
 
@@ -148,6 +150,7 @@ const Games = styled(motion.div)`
   grid-row-gap: 5rem;
   justify-content: center;
   align-items: center;
+  margin: 0.5rem 0;
 `;
 
 const StyledSelect = styled(Select)`

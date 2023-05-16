@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loadDetail } from "../actions/detailAction";
+import { loadDetail } from "../store/actions/detailAction";
 
 import { popup } from "../animations";
 
