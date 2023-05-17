@@ -4,6 +4,7 @@ import xbox from "../../assets/xbox.svg";
 import nintendo from "../../assets/nintendo.svg";
 import apple from "../../assets/apple.svg";
 import gamepad from "../../assets/gamepad.svg";
+import android from "../../assets/android.svg";
 
 import { useComponentStyles } from "../../hooks/useComponentStyles";
 const Platform = ({ platforms }) => {
@@ -11,16 +12,20 @@ const Platform = ({ platforms }) => {
 
   const getPlatform = (platform) => {
     switch (platform) {
-      case "Playstation 4":
+      case "PlayStation 4":
         return playstation;
       case "Xbox One":
         return xbox;
+      case "iOS":
+      case "macOS":
+        return apple;
+      case "Android":
+        return android;
       case "PC":
         return steam;
       case "Nintendo Switch":
         return nintendo;
-      case "macOS":
-        return apple;
+
       default:
         return gamepad;
     }

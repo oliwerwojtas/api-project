@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import useDebounce from "../hooks/useDebounce";
 //
 import { BiLibrary } from "react-icons/bi";
+
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,8 +22,10 @@ const Navigation = () => {
   const [textInput, setTextInput] = useState("");
 
   const { popular, allGames, searched } = useSelector((state) => state.games);
+  const { favoritesItems } = useSelector((state) => state.favorites);
   const [filteredResults, setFilteredResults] = useState([]);
 
+  // const clickCount = useSelector((state) => state.counter.clickCount);
   const debouncedTextInput = useDebounce(textInput, 500);
 
   useEffect(() => {
@@ -84,11 +87,9 @@ const Navigation = () => {
       </form>
       <div className="search-icon">
         <span>Favourite</span>
+        <span>{favoritesItems.length}</span>
         <BiLibrary />
       </div>
-      {/* <ResultsDiv>
-        <Results></Results>
-      </ResultsDiv> */}
     </StyledNavigation>
   );
 };
@@ -159,6 +160,7 @@ const Results = styled(motion.div)`
   height: max-content;
   background-color: red;
   position: absolute;
+  z-index: 1;
 `;
 
 export default Navigation;

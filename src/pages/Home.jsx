@@ -102,7 +102,7 @@ const Home = () => {
           </li>
         </ul>
       </Dropdown>
-      <span>Upcoming Games</span>
+      <SectionTitle>Upcoming Games</SectionTitle>
       <Games>
         <GamesFiltring
           games={upcoming}
@@ -111,7 +111,7 @@ const Home = () => {
           sortOption={sortOption}
         />
       </Games>
-      <span>Popular Games</span>
+      <SectionTitle>Popular Games</SectionTitle>
       <Games>
         <GamesFiltring
           games={popular}
@@ -120,7 +120,7 @@ const Home = () => {
           sortOption={sortOption}
         />
       </Games>
-      <span>NewGames Games</span>
+      <SectionTitle>NewGames Games</SectionTitle>
       <Games>
         <GamesFiltring
           games={newGames}
@@ -135,11 +135,6 @@ const Home = () => {
 
 const GameList = styled(motion.div)`
   padding: 0rem 2rem;
-  span {
-    font-size: 1.8rem;
-    color: white;
-    font-weight: bold;
-  }
 `;
 
 const Games = styled(motion.div)`
@@ -164,5 +159,15 @@ const SelectDropdown = styled(motion.div)`
 const Dropdown = styled(motion.div)`
   display: flex;
   justify-content: end;
+`;
+
+const SectionTitle = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: bold;
+  margin: 2rem 0;
 `;
 export default Home;
