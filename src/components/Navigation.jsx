@@ -70,7 +70,7 @@ const Navigation = () => {
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
           type="text"
-          placeholder="Search "
+          placeholder="search..."
         />
         {textInput && (
           <Results>
@@ -107,6 +107,18 @@ const Logo = styled(motion.div)`
     width: 2rem;
     margin-right: 0.5rem;
     filter: invert(1);
+  }
+
+  @media (max-width: 400px) {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1rem;
+    align-items: center;
+    img {
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -152,6 +164,15 @@ const StyledNavigation = styled(motion.nav)`
       margin-left: auto;
       margin-right: 6rem;
     }
+
+    @media (max-width: 400px) {
+    input {
+      min-width: 50px;
+    }
+    .search-icon {
+      margin-right: 1rem;
+    }
+  }
     
 `;
 

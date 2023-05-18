@@ -11,6 +11,8 @@ import { fadeIn } from "../animations";
 import GamesFiltring from "../components/GamesFiltring";
 import Select from "react-select";
 import "react-dropdown/style.css";
+import { RiSortAsc } from "react-icons/all";
+import SortDropdown from "../components/SortDropdown";
 const Home = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
@@ -18,7 +20,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [sortOption, setSortOption] = useState({ value: "name-asc", label: "Name A-Z" });
-  const { popular, newGames, upcoming, searched } = useSelector((state) => state.games);
+  const { popular, newGames, upcoming } = useSelector((state) => state.games);
 
   const { genres } = useSelector((state) => state.genres);
 
@@ -26,8 +28,6 @@ const Home = () => {
     dispatch(loadGames());
     dispatch(loadGenres());
   }, [dispatch]);
-
-  console.log(popular);
 
   const options = genres
     ? [
@@ -41,17 +41,27 @@ const Home = () => {
         })),
       ]
     : [];
+
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
-      background: "#202020",
+      background: "#181C21",
       borderRadius: "0.5rem",
       borderColor: "#202020",
-      color: "white",
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: "#91A4B4",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: "#91A4B4",
+      background: state.isSelected ? "#151515" : "#2A303C",
+      "&:hover": {
+        background: "#373C49",
+      },
     }),
   };
-
-  // filter games by selected category
 
   const handleSelectChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
@@ -72,36 +82,7 @@ const Home = () => {
         />
       </SelectDropdown>
       <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
-      {/* {searched.length > 0 ? (
-        <div className="searched">
-          <Games>
-            <GamesFiltring
-              games={searched}
-              categories={genres}
-              selectedCategory={selectedCategory}
-            />
-          </Games>
-        </div>
-      ) : (
-        ""
-      )} */}
-      <Dropdown className="dropdown dropdown-end">
-        <label tabIndex={0} className="btn m-1">
-          Order by
-        </label>
-        <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-          <li>
-            <button onClick={() => handleSortChange({ value: "name-asc", label: "Name A-Z" })}>
-              Name A-Z
-            </button>
-          </li>
-          <li>
-            <button onClick={() => handleSortChange({ value: "name-desc", label: "Name Z-A" })}>
-              Name Z-A
-            </button>
-          </li>
-        </ul>
-      </Dropdown>
+      <SortDropdown handleSortChange={handleSortChange} />
       <SectionTitle>Upcoming Games</SectionTitle>
       <Games>
         <GamesFiltring
@@ -150,6 +131,9 @@ const Games = styled(motion.div)`
 
 const StyledSelect = styled(Select)`
   min-width: 300px;
+  @media (max-width: 400px) {
+    min-width: 150px;
+  }
 `;
 
 const SelectDropdown = styled(motion.div)`
