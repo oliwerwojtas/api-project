@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadDetail } from "../store/actions/detailAction";
 import { useState } from "react";
 import { popup } from "../animations";
 import { addToFavorites } from "../store/slices/favoritesSlice";
-
+import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { MdOutlineFavorite } from "react-icons/md";
+import { motion, AnimatePresence } from "framer-motion";
 const Game = ({ name, released, image, id }) => {
-  // const stringPathId = id.toString();
   const dispatch = useDispatch();
-
+  const [isFavorite, setIsFavorite] = useState(false);
   const loadHandler = () => {
     document.body.style.overflow = "hidden";
     dispatch(loadDetail(id));
@@ -18,10 +19,14 @@ const Game = ({ name, released, image, id }) => {
 
   const addToWishHandler = (event) => {
     event.stopPropagation();
-    const product = { id, name, released, image };
-    dispatch(addToFavorites(product));
+    const game = { id, name, released, image };
+    dispatch(addToFavorites(game));
+    setIsFavorite(!isFavorite);
   };
-
+  const favoriteVariants = {
+    initial: { opacity: 1, scale: 1 },
+    animate: { scale: [1, 1.5, 1], transition: { duration: 0.5 } },
+  };
   return (
     <StyleGame
       variants={popup}
@@ -36,7 +41,17 @@ const Game = ({ name, released, image, id }) => {
         <p>{released}</p>
         <motion.img layoutId={`image ${id}`} src={image} />
       </Link>
-      <Icon onClick={addToWishHandler}></Icon>
+      <Icon onClick={addToWishHandler}>
+        <motion.div
+          variants={favoriteVariants}
+          initial={isFavorite ? "animate" : "initial"}
+          animate={isFavorite ? "animate" : "initial"}
+          exit="initial"
+          transition={{ duration: 0.5 }}
+        >
+          {isFavorite ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
+        </motion.div>
+      </Icon>
     </StyleGame>
   );
 };
@@ -65,11 +80,9 @@ const StyleGame = styled(motion.div)`
 `;
 const Icon = styled.div`
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.5rem;
-  background-color: red;
-  color: white;
+  top: 0.1rem;
+  right: 0.1rem;
+  padding: 0.3rem;
   font-size: 1.5rem;
   cursor: pointer;
 `;

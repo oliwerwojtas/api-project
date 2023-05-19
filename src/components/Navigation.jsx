@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import gamepad from "../assets/gamelogo.svg";
 import { fadeIn } from "../animations";
+
 //
 import { loadDetail } from "../store/actions/detailAction";
-import { fetchSearch } from "../store/actions/gamesAction";
+import { fetchSearch, loadGames } from "../store/actions/gamesAction";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +15,7 @@ import { useEffect } from "react";
 import useDebounce from "../hooks/useDebounce";
 //
 import { BiLibrary } from "react-icons/bi";
-
+import { BsTrash } from "react-icons/bs";
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,8 +25,7 @@ const Navigation = () => {
   const { popular, allGames, searched } = useSelector((state) => state.games);
   const { favoritesItems } = useSelector((state) => state.favorites);
   const [filteredResults, setFilteredResults] = useState([]);
-
-  // const clickCount = useSelector((state) => state.counter.clickCount);
+  const [favoriteResultsVisible, setFavoriteResultsVisible] = useState(false);
   const debouncedTextInput = useDebounce(textInput, 500);
 
   useEffect(() => {
@@ -47,7 +47,8 @@ const Navigation = () => {
   // };
 
   const clearSearched = () => {
-    dispatch({ type: "CLEAR_SEARCHED" });
+    setFilteredResults([]);
+    setTextInput("");
   };
 
   const handleClick = (id, path) => {
@@ -55,10 +56,17 @@ const Navigation = () => {
     setTextInput("");
     navigate(path);
   };
+  const handleFavoriteClick = () => {
+    setFavoriteResultsVisible(!favoriteResultsVisible);
+  };
 
-  console.log("xd");
-  console.log(popular);
-  console.log(typeof allGames);
+  const handleFavoriteItemClick = (e) => {
+    e.stopPropagation();
+    // Dodaj dowolne inne działania, które chcesz wykonać po kliknięciu w ulubiony przedmiot
+  };
+  const handleHideFavoriteResults = () => {
+    setFavoriteResultsVisible(false);
+  };
   return (
     <StyledNavigation variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={clearSearched}>
@@ -70,7 +78,7 @@ const Navigation = () => {
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
           type="text"
-          placeholder="search..."
+          placeholder={`Search from ${allGames} games...`}
         />
         {textInput && (
           <Results>
@@ -85,10 +93,27 @@ const Navigation = () => {
           </Results>
         )}
       </form>
-      <div className="search-icon">
+      <div className="search-icon" onClick={handleFavoriteClick}>
+        <BiLibrary size={20} />
         <span>Favourite</span>
-        <span>{favoritesItems.length}</span>
-        <BiLibrary />
+        <span>({favoritesItems.length})</span>
+
+        {favoriteResultsVisible && (
+          <ResultsFavo
+            // initial={{ opacity: 0, y: -50 }}
+            // animate={{ opacity: 1, y: 0 }}
+            onClick={handleFavoriteItemClick}
+          >
+            <div onClick={handleHideFavoriteResults}>xd</div>
+            {favoritesItems.map((favoriteItem) => (
+              <Item key={favoriteItem.id}>
+                <img src={favoriteItem.image} alt="game background" />
+                <span>{favoriteItem.name}</span>
+                <BsTrash size={20} />
+              </Item>
+            ))}
+          </ResultsFavo>
+        )}
       </div>
     </StyledNavigation>
   );
@@ -140,16 +165,14 @@ const StyledNavigation = styled(motion.nav)`
     border-radius: .5rem;
     min-width: 300px;
     padding: .6rem;
-    display: flex;
+    
   }
   
   
   input::placeholder {
     color: gray;
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
+    font-size: 0.6rem;
+  
 
      
       
@@ -160,7 +183,7 @@ const StyledNavigation = styled(motion.nav)`
       align-items: center;
       background-color: #151515;
       border-radius: 0.5rem;
-     
+      position: relative;
       margin-left: auto;
       margin-right: 6rem;
     }
@@ -170,7 +193,7 @@ const StyledNavigation = styled(motion.nav)`
       min-width: 50px;
     }
     .search-icon {
-      margin-right: 1rem;
+      margin-right: 0;
     }
   }
     
@@ -179,9 +202,41 @@ const StyledNavigation = styled(motion.nav)`
 const Results = styled(motion.div)`
   width: 300px;
   height: max-content;
-  background-color: red;
+  background-color: #202020;
   position: absolute;
   z-index: 1;
+
+  p {
+    color: white;
+    padding: 0.2rem;
+  }
+`;
+
+const ResultsFavo = styled(motion.div)`
+  min-width: 700px;
+  height: 400px;
+  overflow-y: scroll;
+  background-color: #202020;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+`;
+
+const Item = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  color: white;
+  img {
+    width: 10rem;
+    margin-right: 0.5rem;
+  }
+
+  svg {
+    margin-left: auto;
+  }
 `;
 
 export default Navigation;

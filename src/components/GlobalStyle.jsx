@@ -14,13 +14,13 @@ const GlobalStyles = createGlobalStyle`
             background-color: darkgrey;
         }
         &::-webkit-scrollbar-track {
-    background: white;
+      
   }
     }
     body{
         font-family: 'Poppins', sans-serif;
         width: 100%;
-        overflow: scroll;
+        overflow-y: scroll;
         background: #151515;
     }
     h2{

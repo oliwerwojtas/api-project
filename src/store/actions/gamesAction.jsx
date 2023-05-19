@@ -20,7 +20,7 @@ export const loadGames = createAsyncThunk("games/loadGames", async () => {
     newGames: newGamesData.data.results,
     upcoming: upcomingData.data.results,
     platforms: platformsData.data.results,
-    allGames: allData.data.results,
+    allGames: allData.data.count,
   };
 });
 

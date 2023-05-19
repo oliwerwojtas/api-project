@@ -10,8 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn } from "../animations";
 import GamesFiltring from "../components/GamesFiltring";
 import Select from "react-select";
-import "react-dropdown/style.css";
-import { RiSortAsc } from "react-icons/all";
+
 import SortDropdown from "../components/SortDropdown";
 const Home = () => {
   const location = useLocation();
@@ -48,14 +47,15 @@ const Home = () => {
       background: "#181C21",
       borderRadius: "0.5rem",
       borderColor: "#202020",
+      color: "white",
     }),
     singleValue: (provided, state) => ({
       ...provided,
-      color: "#91A4B4",
+      color: "white",
     }),
     option: (provided, state) => ({
       ...provided,
-      color: "#91A4B4",
+      color: "white",
       background: state.isSelected ? "#151515" : "#2A303C",
       "&:hover": {
         background: "#373C49",
@@ -79,6 +79,7 @@ const Home = () => {
           options={options}
           onChange={handleSelectChange}
           styles={customStyles}
+          defaultValue={{ value: null, label: "All" }}
         />
       </SelectDropdown>
       <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
