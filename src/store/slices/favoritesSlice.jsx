@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  favoritesItems: localStorage.getItem(" favoritesItems")
+  favoritesItems: localStorage.getItem("favoritesItems")
     ? JSON.parse(localStorage.getItem("favoritesItems"))
     : [],
 };
@@ -21,12 +21,15 @@ export const favoritesSlice = createSlice({
         let buildFavoriteItem = { ...action.payload };
 
         state.favoritesItems?.push(buildFavoriteItem);
-        localStorage.setItem("wishlistItems", JSON.stringify(state.favoritesItems));
+        localStorage.setItem("favoritesItems", JSON.stringify(state.favoritesItems));
       }
     },
 
     removeFavorites: (state, action) => {
-      console.log("not ready yet");
+      let selectedItems = state.favoritesItems?.filter((item) => item.id === action.payload.id);
+      state.favoritesItems.splice(selectedItems, 1);
+
+      localStorage.setItem("favoritesItems", JSON.stringify(state.favoritesItems));
     },
 
     clearFavorites: (state, action) => {

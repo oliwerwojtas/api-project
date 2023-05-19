@@ -16,6 +16,7 @@ import useDebounce from "../hooks/useDebounce";
 //
 import { BiLibrary } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
+import { removeFavorites } from "../store/slices/favoritesSlice";
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -62,11 +63,15 @@ const Navigation = () => {
 
   const handleFavoriteItemClick = (e) => {
     e.stopPropagation();
-    // Dodaj dowolne inne działania, które chcesz wykonać po kliknięciu w ulubiony przedmiot
   };
   const handleHideFavoriteResults = () => {
     setFavoriteResultsVisible(false);
   };
+
+  const removeFromFavoritHandler = (id) => {
+    dispatch(removeFavorites(id));
+  };
+
   return (
     <StyledNavigation variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={clearSearched}>
@@ -109,7 +114,7 @@ const Navigation = () => {
               <Item key={favoriteItem.id}>
                 <img src={favoriteItem.image} alt="game background" />
                 <span>{favoriteItem.name}</span>
-                <BsTrash size={20} />
+                <BsTrash size={20} onClick={() => removeFromFavoritHandler(favoriteItem.id)} />
               </Item>
             ))}
           </ResultsFavo>
@@ -236,6 +241,11 @@ const Item = styled(motion.div)`
 
   svg {
     margin-left: auto;
+  }
+
+  &:hover {
+    background-color: #555555;
+    cursor: pointer;
   }
 `;
 
