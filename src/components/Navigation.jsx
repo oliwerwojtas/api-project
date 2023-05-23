@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import gamepad from "../assets/gamelogo.svg";
@@ -7,13 +7,12 @@ import { fadeIn } from "../animations";
 //
 import { loadDetail } from "../store/actions/detailAction";
 import { fetchSearch, loadGames } from "../store/actions/gamesAction";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { useEffect } from "react";
 import useDebounce from "../hooks/useDebounce";
 //
+import { Link } from "react-router-dom";
 import { BiLibrary } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
 import { removeFavorites } from "../store/slices/favoritesSlice";
@@ -23,12 +22,12 @@ const Navigation = () => {
 
   const [textInput, setTextInput] = useState("");
 
-  const { popular, allGames, searched } = useSelector((state) => state.games);
+  const { allGames, searched } = useSelector((state) => state.games);
   const { favoritesItems } = useSelector((state) => state.favorites);
   const [filteredResults, setFilteredResults] = useState([]);
   const [favoriteResultsVisible, setFavoriteResultsVisible] = useState(false);
   const debouncedTextInput = useDebounce(textInput, 500);
-
+  const { id } = favoritesItems;
   useEffect(() => {
     if (debouncedTextInput) {
       const filteredResults = searched.filter((gameStore) =>
@@ -40,12 +39,6 @@ const Navigation = () => {
       setFilteredResults([]);
     }
   }, [debouncedTextInput, dispatch]);
-
-  // const submitSearch = (e) => {
-  //   e.preventDefault();
-
-  //   setTextInput("");
-  // };
 
   const clearSearched = () => {
     setFilteredResults([]);
@@ -109,11 +102,11 @@ const Navigation = () => {
             // animate={{ opacity: 1, y: 0 }}
             onClick={handleFavoriteItemClick}
           >
-            <div onClick={handleHideFavoriteResults}>xd</div>
+            <span onClick={handleHideFavoriteResults}>xd</span>
             {favoritesItems.map((favoriteItem) => (
               <Item key={favoriteItem.id}>
                 <img src={favoriteItem.image} alt="game background" />
-                <span>{favoriteItem.name}</span>
+                <Link to={`/game/${id}`}>{favoriteItem.name}</Link>
                 <BsTrash size={20} onClick={() => removeFromFavoritHandler(favoriteItem.id)} />
               </Item>
             ))}
@@ -132,6 +125,7 @@ const Logo = styled(motion.div)`
   cursor: pointer;
   font-weight: bold;
   font-size: 2rem;
+
   img {
     height: 2rem;
     width: 2rem;
@@ -150,6 +144,17 @@ const Logo = styled(motion.div)`
       font-size: 1.5rem;
     }
   }
+  @media (max-width: 500px) {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1rem;
+    align-items: center;
+    img {
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 const StyledNavigation = styled(motion.nav)`
@@ -157,6 +162,8 @@ const StyledNavigation = styled(motion.nav)`
   flex-wrap: wrap;
   padding: 1.6rem 5rem;
   width: 100%;
+  position: sticky;
+  top: 0;
   h1 {
     color: white;
   }
@@ -201,7 +208,14 @@ const StyledNavigation = styled(motion.nav)`
       margin-right: 0;
     }
   }
-    
+     @media (max-width: 830px) {
+    input {
+      min-width: 50px;
+    }
+    .search-icon {
+      margin-right: 0;
+    }
+  }
 `;
 
 const Results = styled(motion.div)`
@@ -218,7 +232,7 @@ const Results = styled(motion.div)`
 `;
 
 const ResultsFavo = styled(motion.div)`
-  min-width: 700px;
+  min-width: 50%;
   height: 400px;
   overflow-y: scroll;
   background-color: #202020;
@@ -227,6 +241,18 @@ const ResultsFavo = styled(motion.div)`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+
+  span {
+    position: sticky;
+    top: 0;
+    background-color: red;
+    width: 100%;
+    display: block;
+  }
+
+  @media (max-width: 1024px) {
+    min-width: 70%;
+  }
 `;
 
 const Item = styled(motion.div)`
@@ -238,14 +264,27 @@ const Item = styled(motion.div)`
     width: 10rem;
     margin-right: 0.5rem;
   }
+  a {
+    color: white;
+    width: 50%;
+  }
 
   svg {
+    display: block;
     margin-left: auto;
   }
 
   &:hover {
     background-color: #555555;
     cursor: pointer;
+  }
+  @media (max-width: 390px) {
+    img {
+      display: none;
+    }
+    a {
+      width: 80%;
+    }
   }
 `;
 

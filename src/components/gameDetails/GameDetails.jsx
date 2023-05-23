@@ -84,7 +84,7 @@ const CardShadow = styled(motion.div)`
     width: 0.5rem;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #ff7676;
+    background-color: #181c21;
   }
   &::-webkit-scrollbar-track {
     background: white;
@@ -94,7 +94,7 @@ const CardShadow = styled(motion.div)`
 const Detail = styled(motion.div)`
   max-width: 40%;
   border-radius: 1rem;
-  padding: 2rem 5rem;
+  padding: 2rem 3rem;
   background: white;
   position: absolute;
   left: 30%;
@@ -103,10 +103,22 @@ const Detail = styled(motion.div)`
   img {
     width: 100%;
   }
+  @media screen and (max-width: 1200px) {
+    max-width: 60%;
+    left: 20%;
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
 
+  @media screen and (max-width: 800px) {
+    max-width: 70%;
+    left: 15%;
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
   @media screen and (max-width: 400px) {
     max-width: 330px;
-    left: 4%;
+    left: 7%;
     font-size: 0.8rem;
     padding: 1rem;
   }

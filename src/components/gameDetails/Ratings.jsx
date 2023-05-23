@@ -9,7 +9,7 @@ const Ratings = ({ game }) => {
       chart: {
         background: "#222",
       },
-      colors: ["#2E8B57", "#FFA07A", "#ADD8E6", "#FFD700"], // lista kolorów dla etykiet
+      colors: ["#2E8B57", "#FFA07A", "#ADD8E6", "#FFD700"],
     },
     series: game.ratings.map((el) => el.count),
   };

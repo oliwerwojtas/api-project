@@ -4,31 +4,46 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadDetail } from "../store/actions/detailAction";
 import { useState } from "react";
+import { useEffect } from "react";
 import { popup } from "../animations";
 import { addToFavorites } from "../store/slices/favoritesSlice";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { MdOutlineFavorite } from "react-icons/md";
-import { motion, AnimatePresence } from "framer-motion";
+import { useComponentStyles } from "../hooks/useComponentStyles";
+import { motion } from "framer-motion";
+import FavoriteButton from "./FavouriteButton";
 const Game = ({ name, released, image, id }) => {
   const dispatch = useDispatch();
+  // const { GameContainer } = useComponentStyles();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [alreadyIn, setAlreadyIn] = useState(false);
+
+  useEffect(() => {
+    const favoritesFromStorage = localStorage.getItem("favoritesItems");
+    if (favoritesFromStorage) {
+      const favorites = JSON.parse(favoritesFromStorage);
+      const isGameFavorite = favorites.some((favorite) => favorite.id === id);
+      setIsFavorite(isGameFavorite);
+    }
+  });
   const loadHandler = () => {
     document.body.style.overflow = "hidden";
     dispatch(loadDetail(id));
   };
 
-  const addToWishHandler = (event) => {
-    event.stopPropagation();
+  const addToFavoritesHandler = (event) => {
+    // event.stopPropagation();
     const game = { id, name, released, image };
     dispatch(addToFavorites(game));
+
+    if (alreadyIn) {
+      return;
+    }
+
     setIsFavorite(!isFavorite);
+    setAlreadyIn(true);
   };
-  const favoriteVariants = {
-    initial: { opacity: 1, scale: 1 },
-    animate: { scale: [1, 1.5, 1], transition: { duration: 0.5 } },
-  };
+
   return (
-    <StyleGame
+    <GameContainer
       variants={popup}
       initial="hidden"
       animate="show"
@@ -41,22 +56,12 @@ const Game = ({ name, released, image, id }) => {
         <p>{released}</p>
         <motion.img layoutId={`image ${id}`} src={image} />
       </Link>
-      <Icon onClick={addToWishHandler}>
-        <motion.div
-          variants={favoriteVariants}
-          initial={isFavorite ? "animate" : "initial"}
-          animate={isFavorite ? "animate" : "initial"}
-          exit="initial"
-          transition={{ duration: 0.5 }}
-        >
-          {isFavorite ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
-        </motion.div>
-      </Icon>
-    </StyleGame>
+      <FavoriteButton isFavorite={isFavorite} addToFavoritesHandler={addToFavoritesHandler} />
+    </GameContainer>
   );
 };
 
-const StyleGame = styled(motion.div)`
+const GameContainer = styled(motion.div)`
   position: relative;
   min-height: 30vh;
 
@@ -77,14 +82,6 @@ const StyleGame = styled(motion.div)`
   h3 {
     height: 8rem;
   }
-`;
-const Icon = styled.div`
-  position: absolute;
-  top: 0.1rem;
-  right: 0.1rem;
-  padding: 0.3rem;
-  font-size: 1.5rem;
-  cursor: pointer;
 `;
 
 export default Game;
