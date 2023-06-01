@@ -9,7 +9,10 @@ const SortDropdown = ({ handleSortChange }) => {
         Sort
         <RiSortAsc size={18} className="ml-1" />
       </label>
-      <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+      <DropdownContent
+        tabIndex={0}
+        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+      >
         <li>
           <button onClick={() => handleSortChange({ value: "name-asc", label: "Name A-Z" })}>
             Name A-Z
@@ -20,7 +23,7 @@ const SortDropdown = ({ handleSortChange }) => {
             Name Z-A
           </button>
         </li>
-      </ul>
+      </DropdownContent>
     </Dropdown>
   );
 };
@@ -30,6 +33,11 @@ const Dropdown = styled(motion.div)`
   justify-content: end;
   align-items: center;
   color: white;
+  position: relative;
 `;
 
+const DropdownContent = styled(motion.ul)`
+  position: absolute;
+  top: 100%;
+`;
 export default SortDropdown;

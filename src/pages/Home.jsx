@@ -1,17 +1,22 @@
-import React, { useEffect } from "react";
-import GameDetail from "../components/gameDetails/GameDetails";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+//components
+import GameDetail from "../components/gameDetails/GameDetails";
+import GamesFiltring from "../components/GamesFiltring";
+import SortDropdown from "../components/Dropdown";
+//utilities
 import { loadGames } from "../store/actions/gamesAction";
 import { loadGenres } from "../store/actions/genresAction";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn } from "../animations";
-import GamesFiltring from "../components/GamesFiltring";
 import Select from "react-select";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import SortDropdown from "../components/SortDropdown";
+import { customStyles } from "../configs/utils";
+
 const Home = () => {
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
@@ -20,7 +25,6 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [sortOption, setSortOption] = useState({ value: "name-asc", label: "Name A-Z" });
   const { popular, newGames, upcoming } = useSelector((state) => state.games);
-
   const { genres } = useSelector((state) => state.genres);
 
   useEffect(() => {
@@ -41,28 +45,6 @@ const Home = () => {
       ]
     : [];
 
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      background: "#181C21",
-      borderRadius: "0.5rem",
-      borderColor: "#202020",
-      color: "white",
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      color: "white",
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      color: "white",
-      background: state.isSelected ? "#151515" : "#2A303C",
-      "&:hover": {
-        background: "#373C49",
-      },
-    }),
-  };
-
   const handleSelectChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
   };
@@ -73,15 +55,16 @@ const Home = () => {
 
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
-      <SelectDropdown>
-        <StyledSelect
+      <ToastContainer position="top-center" style={{ paddingTop: "2rem" }} autoClose={3000} />
+      <SelectContainer>
+        <Selectt
           placeholder="Wybierz..."
           options={options}
           onChange={handleSelectChange}
           styles={customStyles}
           defaultValue={{ value: null, label: "All" }}
         />
-      </SelectDropdown>
+      </SelectContainer>
       <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
       <SortDropdown handleSortChange={handleSortChange} />
       <SectionTitle>Upcoming Games</SectionTitle>
@@ -102,7 +85,7 @@ const Home = () => {
           sortOption={sortOption}
         />
       </Games>
-      <SectionTitle>NewGames Games</SectionTitle>
+      <SectionTitle>New Games</SectionTitle>
       <Games>
         <GamesFiltring
           games={newGames}
@@ -130,22 +113,12 @@ const Games = styled(motion.div)`
   margin: 0.5rem 0;
 `;
 
-const StyledSelect = styled(Select)`
+const Selectt = styled(Select)`
   min-width: 300px;
-  @media (max-width: 400px) {
+  @media (max-width: 465px) {
     min-width: 150px;
   }
 `;
-
-const SelectDropdown = styled(motion.div)`
-  display: flex;
-`;
-
-const Dropdown = styled(motion.div)`
-  display: flex;
-  justify-content: end;
-`;
-
 const SectionTitle = styled(motion.div)`
   display: flex;
   justify-content: center;
@@ -154,5 +127,9 @@ const SectionTitle = styled(motion.div)`
   color: white;
   font-weight: bold;
   margin: 2rem 0;
+`;
+
+const SelectContainer = styled(motion.div)`
+  display: flex;
 `;
 export default Home;

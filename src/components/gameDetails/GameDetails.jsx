@@ -10,6 +10,7 @@ import Series from "./Series";
 import Genres from "./Genres";
 import Ratings from "./Ratings";
 import Gallery from "./Gallery";
+
 const GameDetail = ({ pathId }) => {
   const navigate = useNavigate();
   const closeDetailHandler = (e) => {
@@ -21,7 +22,6 @@ const GameDetail = ({ pathId }) => {
   };
 
   const { screen, game, series, achievements, isLoading } = useSelector((state) => state.detail);
-  console.log(game);
   return (
     <>
       {!isLoading && (
@@ -38,13 +38,13 @@ const GameDetail = ({ pathId }) => {
                 </Rating>
               </Stats>
               <Info>
-                <h3>Platforms</h3>
+                <span>Platforms</span>
 
                 <Platform platforms={game.platforms} />
               </Info>
 
               <div>
-                <h3>Website</h3>
+                <span>Website</span>
                 <a href={game.website}>{game.website}</a>
               </div>
 
@@ -73,7 +73,7 @@ const GameDetail = ({ pathId }) => {
 const CardShadow = styled(motion.div)`
   width: 100%;
   min-height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -99,6 +99,7 @@ const Detail = styled(motion.div)`
   position: absolute;
   left: 30%;
   color: black;
+  background-color: white;
   z-index: 10;
   img {
     width: 100%;
@@ -134,8 +135,8 @@ const Stats = styled(motion.div)`
     font-size: 1rem;
   }
   img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
     display: inline;
   }
 `;
@@ -162,6 +163,20 @@ const Description = styled(motion.div)`
 
 const GameName = styled(motion.div)`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0.8rem;
+
+  img {
+    width: 10px;
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    width: 50%;
+    text-align: left;
+  }
 `;
 
 const Rating = styled(motion.div)`

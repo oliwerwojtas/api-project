@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import gamepad from "../assets/gamelogo.svg";
-import { fadeIn } from "../animations";
-
-//
-import { loadDetail } from "../store/actions/detailAction";
-import { fetchSearch, loadGames } from "../store/actions/gamesAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import useDebounce from "../hooks/useDebounce";
-//
+//components
+//utilities
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { fadeIn } from "../animations";
+import { loadDetail } from "../store/actions/detailAction";
+import { fetchSearch } from "../store/actions/gamesAction";
+import { removeFavorites } from "../store/slices/favoritesSlice";
 import { Link } from "react-router-dom";
 import { BiLibrary } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
-import { removeFavorites } from "../store/slices/favoritesSlice";
+import iconClose from "../assets/icon-close.svg";
+import gamepad from "../assets/gamelogo.svg";
+
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,6 +28,7 @@ const Navigation = () => {
   const [favoriteResultsVisible, setFavoriteResultsVisible] = useState(false);
   const debouncedTextInput = useDebounce(textInput, 500);
   const { id } = favoritesItems;
+  console.log(favoritesItems);
   useEffect(() => {
     if (debouncedTextInput) {
       const filteredResults = searched.filter((gameStore) =>
@@ -102,7 +103,9 @@ const Navigation = () => {
             // animate={{ opacity: 1, y: 0 }}
             onClick={handleFavoriteItemClick}
           >
-            <span onClick={handleHideFavoriteResults}>xd</span>
+            <span onClick={handleHideFavoriteResults}>
+              <img src={iconClose} alt="close-icon" />
+            </span>
             {favoritesItems.map((favoriteItem) => (
               <Item key={favoriteItem.id}>
                 <img src={favoriteItem.image} alt="game background" />
@@ -144,7 +147,7 @@ const Logo = styled(motion.div)`
       font-size: 1.5rem;
     }
   }
-  @media (max-width: 500px) {
+  @media (max-width: 523px) {
     width: 100%;
     padding: 0;
     margin-bottom: 1rem;
@@ -162,8 +165,7 @@ const StyledNavigation = styled(motion.nav)`
   flex-wrap: wrap;
   padding: 1.6rem 5rem;
   width: 100%;
-  position: sticky;
-  top: 0;
+  
   h1 {
     color: white;
   }
@@ -184,11 +186,7 @@ const StyledNavigation = styled(motion.nav)`
   input::placeholder {
     color: gray;
     font-size: 0.6rem;
-  
-
-     
-      
-    }
+}
     .search-icon {
       display: flex;
       justify-content: end;
@@ -200,22 +198,26 @@ const StyledNavigation = styled(motion.nav)`
       margin-right: 6rem;
     }
 
-    @media (max-width: 400px) {
-    input {
-      min-width: 50px;
+    @media (max-width: 320px) {
+      input {
+        min-width: 45px;
+      }
+      .search-icon {
+        margin-right: 0;
+      }
     }
-    .search-icon {
-      margin-right: 0;
+
+    @media (max-width: 830px) {
+      input {
+        min-width: 50px;
+      }
+      .search-icon {
+        margin-right: 0;
+      }
     }
-  }
-     @media (max-width: 830px) {
-    input {
-      min-width: 50px;
-    }
-    .search-icon {
-      margin-right: 0;
-    }
-  }
+
+ 
+  
 `;
 
 const Results = styled(motion.div)`
@@ -228,6 +230,9 @@ const Results = styled(motion.div)`
   p {
     color: white;
     padding: 0.2rem;
+  }
+  p:hover {
+    background-color: #373c49;
   }
 `;
 
@@ -245,7 +250,7 @@ const ResultsFavo = styled(motion.div)`
   span {
     position: sticky;
     top: 0;
-    background-color: red;
+    background-color: gray;
     width: 100%;
     display: block;
   }

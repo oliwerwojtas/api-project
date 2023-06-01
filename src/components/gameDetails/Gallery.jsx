@@ -3,7 +3,7 @@ const Gallery = ({ screen }) => {
   const { Container, Image } = useComponentStyles();
   return (
     <Container>
-      <h3>Screens:</h3>
+      <span>Screens:</span>
       {screen.results.map((screen) => (
         <Image>
           <img src={screen.image} key={screen.id} alt="game" />

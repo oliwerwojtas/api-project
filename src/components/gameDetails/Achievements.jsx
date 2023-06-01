@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useComponentStyles } from "../../hooks/useComponentStyles";
+//utilities
 import { collapse } from "../../animations";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { useComponentStyles } from "../../hooks/useComponentStyles";
 
 const Achievements = ({ achievements }) => {
   const { Container, Accordian, AccordianName, AccordianDescription, AccordianContent } =
@@ -15,11 +16,11 @@ const Achievements = ({ achievements }) => {
 
   return (
     <Container>
-      <h3>Achievements</h3>
+      <span>Achievements</span>
       {achievements.results.map((achievement, index) => (
         <Accordian key={index}>
           <AccordianName active={activeIndex === index} onClick={() => handleClick(index)}>
-            {achievement.name}
+            <span>{achievement.name}</span>
             <span>{activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}</span>
           </AccordianName>
           <AccordianContent

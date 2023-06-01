@@ -12,7 +12,9 @@ export const useComponentStyles = () => {
     align-items: center;
     cursor: pointer;
     border: 1px solid black;
-    background-color: ${(props) => (props.active ? "#CCC" : "transparent")};
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    background-color: ${(props) => (props.active ? "#FF7676" : "transparent")};
   `;
   const AccordianDescription = styled(motion.div)`
     margin-top: 1rem;
@@ -23,6 +25,15 @@ export const useComponentStyles = () => {
 
   const Genre = styled(motion.div)`
     display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    span {
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 0.8rem;
+    }
   `;
   const Container = styled(motion.div)`
     display: flex;
@@ -65,30 +76,19 @@ export const useComponentStyles = () => {
 
   const StarsContainer = styled(motion.div)`
     display: flex;
-  `;
-
-  const GameContainer = styled(motion.div)`
-    position: relative;
-    min-height: 30vh;
-
-    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    background-color: #202020;
     img {
-      width: 100%;
-      height: 20vh;
-      object-fit: cover;
+      width: 1.7rem;
+      height: 1.7rem;
     }
-    h3,
-    p {
-      color: white;
-    }
-    h3 {
-      height: 8rem;
+
+    @media screen and (max-width: 550px) {
+      img {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
     }
   `;
+
   return {
     RatingsContainer,
     StarsContainer,
@@ -100,6 +100,5 @@ export const useComponentStyles = () => {
     AccordianName,
     AccordianDescription,
     AccordianContent,
-    GameContainer,
   };
 };

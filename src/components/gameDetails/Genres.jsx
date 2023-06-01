@@ -4,10 +4,10 @@ const Genres = ({ game }) => {
   const { Container, Genre } = useComponentStyles();
   return (
     <Container>
-      <h3>Genres:</h3>
+      <span>Genres:</span>
       {game.genres.map((genre) => (
         <Genre>
-          {genre.name} -<p> in total games({genre.games_count})</p>
+          <span>{genre.name}</span> -<p> in total games({genre.games_count})</p>
         </Genre>
       ))}
     </Container>

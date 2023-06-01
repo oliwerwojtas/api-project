@@ -1,10 +1,6 @@
 import { BASE_URL, PAGE_SIZE } from "./config";
 import { getCurrentDate, getLastYearDate } from "./utils";
 
-// const popular_games = `games?key=${
-//   import.meta.env.VITE_REACT_APP_API_KEY
-// }&dates=${getLastYearDate()},${getCurrentDate()}&ordering=-rating&page_size=${PAGE_SIZE}`;
-
 const upcoming_games = `games?key=${
   import.meta.env.VITE_REACT_APP_API_KEY
 }&dates=${getLastYearDate()},${getCurrentDate()}&ordering=-added&page_size=${PAGE_SIZE}`;

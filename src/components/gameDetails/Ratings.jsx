@@ -5,18 +5,18 @@ const Ratings = ({ game }) => {
   const { RatingsContainer } = useComponentStyles();
   const chartData = {
     options: {
-      labels: game.ratings.map((el) => el.title),
+      labels: game.ratings.map((game) => game.title),
       chart: {
         background: "#222",
+        color: "#111",
       },
-      colors: ["#2E8B57", "#FFA07A", "#ADD8E6", "#FFD700"],
     },
-    series: game.ratings.map((el) => el.count),
+    series: game.ratings.map((game) => game.count),
   };
 
   return (
     <RatingsContainer key={game.id}>
-      <h3>Ratings:</h3>
+      <span>Ratings:</span>
       <Chart options={chartData.options} series={chartData.series} type="donut" height={350} />
     </RatingsContainer>
   );

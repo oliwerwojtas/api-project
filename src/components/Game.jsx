@@ -1,18 +1,17 @@
+import { useState, useEffect } from "react";
+//components
+import FavoriteButton from "./FavouriteButton";
+//utilities
 import styled from "styled-components";
-
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadDetail } from "../store/actions/detailAction";
-import { useState } from "react";
-import { useEffect } from "react";
-import { popup } from "../animations";
 import { addToFavorites } from "../store/slices/favoritesSlice";
-import { useComponentStyles } from "../hooks/useComponentStyles";
+import { popup } from "../animations";
 import { motion } from "framer-motion";
-import FavoriteButton from "./FavouriteButton";
+
 const Game = ({ name, released, image, id }) => {
   const dispatch = useDispatch();
-  // const { GameContainer } = useComponentStyles();
   const [isFavorite, setIsFavorite] = useState(false);
   const [alreadyIn, setAlreadyIn] = useState(false);
 
@@ -23,21 +22,17 @@ const Game = ({ name, released, image, id }) => {
       const isGameFavorite = favorites.some((favorite) => favorite.id === id);
       setIsFavorite(isGameFavorite);
     }
-  });
+  }, [id]);
+
   const loadHandler = () => {
     document.body.style.overflow = "hidden";
     dispatch(loadDetail(id));
   };
 
   const addToFavoritesHandler = (event) => {
-    // event.stopPropagation();
+    event.stopPropagation();
     const game = { id, name, released, image };
     dispatch(addToFavorites(game));
-
-    if (alreadyIn) {
-      return;
-    }
-
     setIsFavorite(!isFavorite);
     setAlreadyIn(true);
   };

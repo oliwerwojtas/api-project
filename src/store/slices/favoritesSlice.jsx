@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   favoritesItems: localStorage.getItem("favoritesItems")
@@ -16,7 +18,7 @@ export const favoritesSlice = createSlice({
       );
 
       if (existsItemIndex >= 0) {
-        alert("Already in");
+        toast.error("Already in favourites!");
       } else {
         let buildFavoriteItem = { ...action.payload };
 
@@ -25,18 +27,10 @@ export const favoritesSlice = createSlice({
       }
     },
     removeFavorites: (state, action) => {
-      let selectedItems = state.favoritesItems?.filter((item) => item.id === action.payload.id);
-      state.favoritesItems.splice(selectedItems, 1);
-
-      localStorage.setItem("favoritesItems", JSON.stringify(state.favoritesItems));
+      const updatedFavorites = state.favoritesItems.filter((item) => item.id !== action.payload);
+      state.favoritesItems = updatedFavorites;
+      localStorage.setItem("favoritesItems", JSON.stringify(updatedFavorites));
     },
-    // removeFavorites: (state, action) => {
-    //   let selectedIndex = state.favoritesItems.findIndex((item) => item.id === action.payload.id);
-    //   if (selectedIndex >= 0) {
-    //     state.favoritesItems.splice(selectedIndex, 1);
-    //     localStorage.setItem("favoritesItems", JSON.stringify(state.favoritesItems));
-    //   }
-    // },
 
     clearFavorites: (state, action) => {
       state.favoritesItems = [];
