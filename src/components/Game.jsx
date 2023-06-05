@@ -9,6 +9,8 @@ import { loadDetail } from "../store/actions/detailAction";
 import { addToFavorites } from "../store/slices/favoritesSlice";
 import { popup } from "../animations";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Game = ({ name, released, image, id }) => {
   const dispatch = useDispatch();
@@ -31,10 +33,14 @@ const Game = ({ name, released, image, id }) => {
 
   const addToFavoritesHandler = (event) => {
     event.stopPropagation();
-    const game = { id, name, released, image };
-    dispatch(addToFavorites(game));
-    setIsFavorite(!isFavorite);
-    setAlreadyIn(true);
+    if (!alreadyIn) {
+      const game = { id, name, released, image };
+      dispatch(addToFavorites(game));
+      setIsFavorite(true);
+      setAlreadyIn(true);
+    } else {
+      toast.error("Already in favorites!");
+    }
   };
 
   return (

@@ -28,7 +28,7 @@ const Navigation = () => {
   const [favoriteResultsVisible, setFavoriteResultsVisible] = useState(false);
   const debouncedTextInput = useDebounce(textInput, 500);
   const { id } = favoritesItems;
-  console.log(favoritesItems);
+
   useEffect(() => {
     if (debouncedTextInput) {
       const filteredResults = searched.filter((gameStore) =>
@@ -98,21 +98,21 @@ const Navigation = () => {
         <span>({favoritesItems.length})</span>
 
         {favoriteResultsVisible && (
-          <ResultsFavo
-            // initial={{ opacity: 0, y: -50 }}
-            // animate={{ opacity: 1, y: 0 }}
-            onClick={handleFavoriteItemClick}
-          >
+          <ResultsFavo onClick={handleFavoriteItemClick}>
             <span onClick={handleHideFavoriteResults}>
               <img src={iconClose} alt="close-icon" />
             </span>
-            {favoritesItems.map((favoriteItem) => (
-              <Item key={favoriteItem.id}>
-                <img src={favoriteItem.image} alt="game background" />
-                <Link to={`/game/${id}`}>{favoriteItem.name}</Link>
-                <BsTrash size={20} onClick={() => removeFromFavoritHandler(favoriteItem.id)} />
-              </Item>
-            ))}
+            {favoritesItems.length === 0 ? (
+              <p>No favourites yet!</p>
+            ) : (
+              favoritesItems.map((favoriteItem) => (
+                <Item key={favoriteItem.id}>
+                  <img src={favoriteItem.image} alt="game background" />
+                  <Link to={`/game/${favoriteItem.id}`}>{favoriteItem.name}</Link>
+                  <BsTrash size={20} onClick={() => removeFromFavoritHandler(favoriteItem.id)} />
+                </Item>
+              ))
+            )}
           </ResultsFavo>
         )}
       </div>
@@ -258,6 +258,11 @@ const ResultsFavo = styled(motion.div)`
   @media (max-width: 1024px) {
     min-width: 70%;
   }
+  p {
+    color: white;
+    text-align: center;
+    padding-top: 3rem;
+  }
 `;
 
 const Item = styled(motion.div)`
@@ -292,5 +297,4 @@ const Item = styled(motion.div)`
     }
   }
 `;
-
 export default Navigation;

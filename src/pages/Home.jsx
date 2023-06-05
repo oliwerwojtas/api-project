@@ -14,7 +14,6 @@ import { fadeIn } from "../animations";
 import Select from "react-select";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { customStyles } from "../configs/utils";
 
 const Home = () => {

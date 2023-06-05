@@ -43,10 +43,10 @@ const GameDetail = ({ pathId }) => {
                 <Platform platforms={game.platforms} />
               </Info>
 
-              <div>
+              <Website>
                 <span>Website</span>
                 <a href={game.website}>{game.website}</a>
-              </div>
+              </Website>
 
               <Genres game={game} />
 
@@ -104,6 +104,7 @@ const Detail = styled(motion.div)`
   img {
     width: 100%;
   }
+
   @media screen and (max-width: 1200px) {
     max-width: 60%;
     left: 20%;
@@ -130,6 +131,7 @@ const Stats = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1rem;
   h3 {
     width: 100%;
     font-size: 1rem;
@@ -144,6 +146,13 @@ const Info = styled(motion.div)`
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 1rem;
+
+  span {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 
   @media screen and (max-width: 400px) {
     display: flex;
@@ -161,6 +170,21 @@ const Description = styled(motion.div)`
   margin: 5rem 0rem;
 `;
 
+const Website = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+
+  span {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  a {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+`;
 const GameName = styled(motion.div)`
   display: flex;
   justify-content: center;
@@ -182,5 +206,6 @@ const GameName = styled(motion.div)`
 const Rating = styled(motion.div)`
   display: flex;
   width: 100%;
+  margin-bottom: 1rem;
 `;
 export default GameDetail;

@@ -7,7 +7,7 @@ const Genres = ({ game }) => {
       <span>Genres:</span>
       {game.genres.map((genre) => (
         <Genre>
-          <span>{genre.name}</span> -<p> in total games({genre.games_count})</p>
+          <strong>{genre.name}</strong> -<p> in total games({genre.games_count})</p>
         </Genre>
       ))}
     </Container>

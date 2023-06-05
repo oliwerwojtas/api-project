@@ -14,7 +14,10 @@ export const useComponentStyles = () => {
     border: 1px solid black;
     border-radius: 0.5rem;
     padding: 0.2rem;
-    background-color: ${(props) => (props.active ? "#FF7676" : "transparent")};
+    background-color: ${(props) => (props.active ? "gray" : "transparent")};
+    p {
+      color: ${(props) => (props.active ? "white" : "black")};
+    }
   `;
   const AccordianDescription = styled(motion.div)`
     margin-top: 1rem;
@@ -38,6 +41,13 @@ export const useComponentStyles = () => {
   const Container = styled(motion.div)`
     display: flex;
     flex-direction: column;
+
+    span {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
   `;
 
   const Image = styled(motion.div)`
@@ -53,7 +63,6 @@ export const useComponentStyles = () => {
 
   const Platforms = styled(motion.div)`
     display: flex;
-
     width: 100%;
     align-items: center;
     justify-content: space-evenly;
@@ -71,6 +80,12 @@ export const useComponentStyles = () => {
 
     h3 {
       padding: 0;
+    }
+
+    span {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
     }
   `;
 

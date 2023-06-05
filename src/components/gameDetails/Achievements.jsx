@@ -17,22 +17,26 @@ const Achievements = ({ achievements }) => {
   return (
     <Container>
       <span>Achievements</span>
-      {achievements.results.map((achievement, index) => (
-        <Accordian key={index}>
-          <AccordianName active={activeIndex === index} onClick={() => handleClick(index)}>
-            <span>{achievement.name}</span>
-            <span>{activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}</span>
-          </AccordianName>
-          <AccordianContent
-            variants={collapse}
-            initial="hidden"
-            animate={activeIndex === index ? "show" : "hidden"}
-          >
-            <AccordianDescription>{achievement.description}</AccordianDescription>
-            <img src={achievement.image} alt="achievement background" />
-          </AccordianContent>
-        </Accordian>
-      ))}
+      {achievements && achievements.results.length > 0 ? (
+        achievements.results.map((achievement, index) => (
+          <Accordian key={index}>
+            <AccordianName active={activeIndex === index} onClick={() => handleClick(index)}>
+              <p>{achievement.name}</p>
+              <p>{activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}</p>
+            </AccordianName>
+            <AccordianContent
+              variants={collapse}
+              initial="hidden"
+              animate={activeIndex === index ? "show" : "hidden"}
+            >
+              <AccordianDescription>{achievement.description}</AccordianDescription>
+              <img src={achievement.image} alt="achievement background" />
+            </AccordianContent>
+          </Accordian>
+        ))
+      ) : (
+        <p>No data!</p>
+      )}
     </Container>
   );
 };

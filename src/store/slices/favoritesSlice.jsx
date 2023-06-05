@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   favoritesItems: localStorage.getItem("favoritesItems")
@@ -18,7 +16,6 @@ export const favoritesSlice = createSlice({
       );
 
       if (existsItemIndex >= 0) {
-        toast.error("Already in favourites!");
       } else {
         let buildFavoriteItem = { ...action.payload };
 
