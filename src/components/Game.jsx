@@ -50,6 +50,7 @@ const Game = ({ name, released, image, id }) => {
       animate="show"
       layoutId={`container ${id}`}
       onClick={loadHandler}
+      data-cy="game"
     >
       <Link to={`/game/${id}`}>
         <motion.h3 layoutId={`title ${id}`}>{name}</motion.h3>

@@ -27,7 +27,6 @@ const Navigation = () => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [favoriteResultsVisible, setFavoriteResultsVisible] = useState(false);
   const debouncedTextInput = useDebounce(textInput, 500);
-  const { id } = favoritesItems;
 
   useEffect(() => {
     if (debouncedTextInput) {
@@ -78,11 +77,13 @@ const Navigation = () => {
           onChange={(e) => setTextInput(e.target.value)}
           type="text"
           placeholder={`Search from ${allGames} games...`}
+          data-cy="gameInput"
         />
         {textInput && (
           <Results>
             {filteredResults.slice(0, 20).map((gameStore) => (
               <div
+                data-cy="inputResults"
                 key={gameStore.id}
                 onClick={() => handleClick(gameStore.id, `/game/${gameStore.id}`)}
               >

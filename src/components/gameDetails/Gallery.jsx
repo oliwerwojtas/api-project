@@ -4,11 +4,13 @@ const Gallery = ({ screen }) => {
   return (
     <Container>
       <span>Screens:</span>
-      {screen.results.map((screen) => (
-        <Image>
-          <img src={screen.image} key={screen.id} alt="game" />
-        </Image>
-      ))}
+      {screen &&
+        screen.results &&
+        screen.results.map((screen) => (
+          <Image key={screen.id}>
+            <img src={screen.image} alt="game" />
+          </Image>
+        ))}
     </Container>
   );
 };

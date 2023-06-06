@@ -55,7 +55,7 @@ const Home = () => {
   return (
     <GameList variants={fadeIn} initial="hidden" animate="show">
       <ToastContainer position="top-center" style={{ paddingTop: "2rem" }} autoClose={3000} />
-      <SelectContainer>
+      <SelectContainer data-cy="select">
         <Selectt
           placeholder="Wybierz..."
           options={options}
@@ -67,7 +67,7 @@ const Home = () => {
       <AnimatePresence> {pathId && <GameDetail pathId={pathId} />}</AnimatePresence>
       <SortDropdown handleSortChange={handleSortChange} />
       <SectionTitle>Upcoming Games</SectionTitle>
-      <Games>
+      <Games data-cy="upcoming">
         <GamesFiltring
           games={upcoming}
           categories={genres}
@@ -76,7 +76,7 @@ const Home = () => {
         />
       </Games>
       <SectionTitle>Popular Games</SectionTitle>
-      <Games>
+      <Games data-cy="popular">
         <GamesFiltring
           games={popular}
           categories={genres}
@@ -85,7 +85,7 @@ const Home = () => {
         />
       </Games>
       <SectionTitle>New Games</SectionTitle>
-      <Games>
+      <Games data-cy="newGames">
         <GamesFiltring
           games={newGames}
           categories={genres}

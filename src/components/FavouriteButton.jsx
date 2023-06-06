@@ -7,13 +7,18 @@ const FavoriteButton = ({ isFavorite, addToFavoritesHandler }) => {
   return (
     <Button onClick={addToFavoritesHandler}>
       <motion.div
+        data-cy="favoriteButton"
         variants={favoriteVariants}
         initial={isFavorite ? "animate" : "initial"}
         animate={isFavorite ? "animate" : "initial"}
         exit="initial"
         transition={{ duration: 0.5 }}
       >
-        {isFavorite ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
+        {isFavorite ? (
+          <MdOutlineFavorite data-cy="isFavorite" />
+        ) : (
+          <MdOutlineFavoriteBorder data-cy="isNotFavorite" />
+        )}
       </motion.div>
     </Button>
   );
